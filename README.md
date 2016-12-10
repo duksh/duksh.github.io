@@ -1,4 +1,4 @@
 duksh.github.io
 ===============
 
-I'll update this soon
+My personal blog linking everything that I learn, practice and share with open source and tech minded fellows.
