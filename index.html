@@ -20,7 +20,7 @@
             padding: 2rem;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        h1, h2 {
+        h1, h2, h3 {
             color: #2c3e50;
             margin-bottom: 1rem;
         }
@@ -50,6 +50,51 @@
         .social-links a:hover {
             text-decoration: underline;
         }
+        .project {
+            background-color: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .project-links {
+            margin: 1rem 0;
+        }
+        .project-links a {
+            display: inline-block;
+            margin-right: 1rem;
+            padding: 0.4rem 1rem;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease;
+        }
+        .project-links a:hover {
+            background-color: #2980b9;
+        }
+        ul {
+            padding-left: 1.5rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .tag {
+            background-color: #e8f4fc;
+            color: #3498db;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            border: 1px solid #bde0f3;
+        }
     </style>
 </head>
 <body>
@@ -76,7 +121,37 @@
             high performance while optimizing resource utilization and expenditure.
         </p>
         
-        <h2>Coming Soon</h2>
+        <h2>Featured Projects</h2>
+        
+        <div class="project">
+            <h3>OpenOps Helm Chart</h3>
+            <p>
+                A Helm chart for deploying the OpenOps FinOps automation platform to Kubernetes environments.
+                This project provides a complete Kubernetes deployment solution with configurable resources,
+                services, secrets management, and persistent storage.
+            </p>
+            <div class="project-links">
+                <a href="https://github.com/duksh/openops-helm-chart" target="_blank" rel="noopener">GitHub Repository</a>
+                <a href="https://duksh.github.io/openops-helm-chart" target="_blank" rel="noopener">Helm Repository</a>
+            </div>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li>Customizable deployment configuration for different environments</li>
+                <li>Secure secrets management integration</li>
+                <li>Persistent volume integration for data storage</li>
+                <li>Automated GitHub Actions workflow for chart releases</li>
+                <li>GitHub Pages-based Helm repository for easy installation</li>
+            </ul>
+            <div class="tags">
+                <span class="tag">Kubernetes</span>
+                <span class="tag">Helm</span>
+                <span class="tag">FinOps</span>
+                <span class="tag">GitHub Actions</span>
+                <span class="tag">OpenOps</span>
+            </div>
+        </div>
+        
+        <h2>More Projects Coming Soon</h2>
         <p>
             I'm working on adding more details about my projects and technical skills.
             Check back soon for updates on my cloud cost optimization work.
