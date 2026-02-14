@@ -1,165 +1,2906 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Duksh K. - Cloud FinOps Specialist</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-            background-color: #f9f9f9;
-        }
-        .container {
-            background-color: white;
-            border-radius: 8px;
-            padding: 2rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        h1, h2, h3 {
-            color: #2c3e50;
-            margin-bottom: 1rem;
-        }
-        p {
-            margin-bottom: 1.5rem;
-        }
-        .highlight {
-            color: #3498db;
-            font-weight: bold;
-        }
-        .footer {
-            margin-top: 2rem;
-            font-size: 0.9rem;
-            color: #7f8c8d;
-            text-align: center;
-        }
-        .social-links {
-            margin: 1.5rem 0;
-        }
-        .social-links a {
-            display: inline-block;
-            margin-right: 1rem;
-            text-decoration: none;
-            color: #3498db;
-            font-weight: bold;
-        }
-        .social-links a:hover {
-            text-decoration: underline;
-        }
-        .project {
-            background-color: #f8f9fa;
-            border-left: 4px solid #3498db;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            border-radius: 0 8px 8px 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-        .project-links {
-            margin: 1rem 0;
-        }
-        .project-links a {
-            display: inline-block;
-            margin-right: 1rem;
-            padding: 0.4rem 1rem;
-            background-color: #3498db;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            transition: background-color 0.2s ease;
-        }
-        .project-links a:hover {
-            background-color: #2980b9;
-        }
-        ul {
-            padding-left: 1.5rem;
-        }
-        li {
-            margin-bottom: 0.5rem;
-        }
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-        .tag {
-            background-color: #e8f4fc;
-            color: #3498db;
-            padding: 0.3rem 0.8rem;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            border: 1px solid #bde0f3;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cloud Economics Framework — FinOps DBA Research</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ─── RESET & TOKENS ────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #f8f7f4;
+  --surface:   #ffffff;
+  --border:    #e2ddd6;
+  --text:      #1a1a2e;
+  --muted:     #7a7a8c;
+  --light:     #f0ede8;
+
+  /* Okabe-Ito colorblind-safe */
+  --dev:       #d55e00;
+  --infra-raw: #009e73;
+  --infra-cud: #009e73;
+  --total:     #444444;
+  --revenue:   #0072b2;
+  --profit:    #7b2d8b;
+  --price-min: #555555;
+
+  --radius: 8px;
+  --shadow: 0 2px 16px rgba(0,0,0,0.07);
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.5;
+  padding: clamp(12px, 3vw, 40px) clamp(10px, 3vw, 24px) 48px;
+}
+
+/* ─── PAPER ─────────────────────────────────────────────────────── */
+.paper {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── LANDING FLOW ORDER ────────────────────────────────────────── */
+.paper > .landing-intro { order: 1; }
+.paper > .credibility-section { order: 2; }
+.paper > .cta-band { order: 3; }
+.paper > .calc-section { order: 4; }
+.paper > .formulas-section { order: 5; }
+.paper > .fig-header { order: 6; }
+.paper > .controls { order: 7; }
+.paper > .chart-section { order: 8; }
+.paper > .zones-strip { order: 9; }
+.paper > .fig-footer { order: 10; }
+
+/* ─── LANDING INTRO ─────────────────────────────────────────────── */
+.landing-intro {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(20px, 4vw, 40px) clamp(16px, 4vw, 36px);
+  background:
+    radial-gradient(circle at 88% 8%, rgba(0,114,178,0.22) 0%, transparent 40%),
+    radial-gradient(circle at 8% 88%, rgba(0,158,115,0.22) 0%, transparent 38%),
+    linear-gradient(135deg, #eef7ff 0%, #f3fbf7 45%, #fff4ea 100%);
+  border-bottom: 1px solid var(--border);
+}
+.landing-intro::before,
+.landing-intro::after {
+  content: '';
+  position: absolute;
+  border-radius: 999px;
+  pointer-events: none;
+}
+.landing-intro::before {
+  width: 220px;
+  height: 220px;
+  top: -95px;
+  right: -70px;
+  background: radial-gradient(circle, rgba(66,133,244,0.28) 0%, rgba(66,133,244,0) 70%);
+}
+.landing-intro::after {
+  width: 210px;
+  height: 210px;
+  bottom: -110px;
+  left: -90px;
+  background: radial-gradient(circle, rgba(52,168,83,0.22) 0%, rgba(52,168,83,0) 72%);
+}
+.landing-kicker {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(0,114,178,0.28);
+  border-radius: 999px;
+  padding: 5px 10px;
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(3px);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(9px, 1.1vw, 10px);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #0072b2;
+  margin-bottom: 10px;
+}
+.landing-title {
+  font-family: 'Source Serif 4', serif;
+  font-size: clamp(24px, 4vw, 42px);
+  line-height: 1.12;
+  font-weight: 400;
+  color: #171b33;
+  text-wrap: balance;
+  max-width: 900px;
+}
+.landing-subtitle {
+  margin-top: 10px;
+  max-width: 880px;
+  font-size: clamp(12px, 1.4vw, 15px);
+  color: #3f4658;
+  line-height: 1.65;
+}
+.landing-grid {
+  margin-top: clamp(16px, 2.8vw, 26px);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+@media (max-width: 900px) {
+  .landing-grid { grid-template-columns: 1fr; }
+}
+.landing-card {
+  position: relative;
+  border: 1px solid rgba(28, 39, 72, 0.12);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(2px);
+  box-shadow: 0 8px 22px rgba(20, 33, 58, 0.07);
+  padding: 13px 14px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.landing-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(20, 33, 58, 0.12);
+}
+.landing-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 3px;
+  border-radius: 10px 10px 0 0;
+}
+.landing-card:nth-child(1) {
+  background: linear-gradient(180deg, rgba(0,114,178,0.08) 0%, rgba(255,255,255,0.9) 58%);
+}
+.landing-card:nth-child(1)::before {
+  background: linear-gradient(90deg, #0072b2, #56b4e9);
+}
+.landing-card:nth-child(2) {
+  background: linear-gradient(180deg, rgba(0,158,115,0.08) 0%, rgba(255,255,255,0.9) 58%);
+}
+.landing-card:nth-child(2)::before {
+  background: linear-gradient(90deg, #009e73, #34a853);
+}
+.landing-card:nth-child(3) {
+  background: linear-gradient(180deg, rgba(230,159,0,0.1) 0%, rgba(255,255,255,0.9) 58%);
+}
+.landing-card:nth-child(3)::before {
+  background: linear-gradient(90deg, #e69f00, #ff8f1f);
+}
+.landing-card-title {
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #1f2a49;
+  margin-bottom: 8px;
+}
+.landing-card:nth-child(1) .landing-card-title { color: #005a8f; }
+.landing-card:nth-child(2) .landing-card-title { color: #0f7358; }
+.landing-card:nth-child(3) .landing-card-title { color: #8f5f00; }
+.landing-card-list {
+  list-style: none;
+  display: grid;
+  gap: 7px;
+}
+.landing-card-list li {
+  position: relative;
+  padding-left: 14px;
+  font-size: 12px;
+  color: #44495a;
+  line-height: 1.55;
+}
+.landing-card-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #009e73;
+  font-weight: 700;
+}
+.landing-card:nth-child(1) .landing-card-list li::before { color: #0072b2; }
+.landing-card:nth-child(3) .landing-card-list li::before { color: #e69f00; }
+.landing-card-link {
+  margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 5px 10px;
+  border: 1px solid rgba(0,114,178,0.28);
+  background: rgba(255,255,255,0.86);
+  color: #005a8f;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;
+}
+.landing-card-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+  filter: brightness(1.02);
+}
+.landing-card-link.features {
+  border-color: rgba(0,158,115,0.34);
+  color: #0f7358;
+}
+.landing-card-link.users {
+  border-color: rgba(230,159,0,0.4);
+  color: #8f5f00;
+}
+
+/* ─── CREDIBILITY SECTION ───────────────────────────────────────── */
+.credibility-section {
+  padding: clamp(16px, 2.8vw, 24px) clamp(16px, 4vw, 36px);
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(240,248,255,0.72) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+}
+.cred-avatar {
+  width: 108px;
+  height: 108px;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 3px solid rgba(255,255,255,0.92);
+  box-shadow: 0 10px 24px rgba(0, 114, 178, 0.28);
+  background: #fff;
+}
+.cred-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.cred-content {
+  max-width: 920px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.cred-kicker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #0072b2;
+  margin-bottom: 4px;
+}
+.cred-title {
+  font-family: 'Source Serif 4', serif;
+  font-size: clamp(18px, 2.2vw, 28px);
+  line-height: 1.2;
+}
+.cred-text {
+  margin-top: 8px;
+  font-size: clamp(12px, 1.35vw, 14px);
+  line-height: 1.65;
+  color: #4a4f5f;
+  max-width: 900px;
+}
+.cred-links {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+.cred-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,114,178,0.2);
+  padding: 5px 11px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  background: linear-gradient(90deg, #0072b2, #009e73);
+  box-shadow: 0 6px 14px rgba(0,114,178,0.25);
+}
+.cred-link:hover { filter: brightness(1.04); }
+
+/* ─── CTA BAND ──────────────────────────────────────────────────── */
+.cta-band {
+  padding: 14px clamp(16px, 4vw, 36px) 18px;
+  border-bottom: 1px solid var(--border);
+  background:
+    radial-gradient(circle at 86% 50%, rgba(0,114,178,0.14) 0%, rgba(0,114,178,0) 38%),
+    linear-gradient(180deg, #fff8f0 0%, #f4f7fb 100%);
+  display: flex;
+  justify-content: center;
+}
+.cta-btn {
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #0072b2 0%, #009e73 52%, #00a5c8 100%);
+  color: #fff;
+  padding: 12px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  box-shadow: 0 10px 22px rgba(0,114,178,0.3);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+.cta-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(0,114,178,0.34);
+  filter: brightness(1.03);
+}
+
+/* ─── FIGURE HEADER ─────────────────────────────────────────────── */
+.fig-header {
+  padding: clamp(16px, 3vw, 28px) clamp(16px, 4vw, 36px) clamp(14px, 2vw, 20px);
+  border-bottom: 1px solid var(--border);
+}
+.fig-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(9px, 1.2vw, 11px);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.fig-title {
+  font-family: 'Source Serif 4', serif;
+  font-size: clamp(16px, 3vw, 26px);
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 6px;
+  line-height: 1.25;
+}
+.fig-caption {
+  font-size: clamp(11px, 1.5vw, 13px);
+  color: var(--muted);
+  max-width: 680px;
+  line-height: 1.6;
+}
+
+/* ─── CONTROLS BAR ──────────────────────────────────────────────── */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: clamp(10px, 1.5vw, 14px) clamp(16px, 4vw, 36px);
+  background: var(--light);
+  border-bottom: 1px solid var(--border);
+}
+.controls-label {
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--muted);
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.btns-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  border-radius: 20px;
+  border: 1.5px solid transparent;
+  background: transparent;
+  font-size: clamp(10px, 1.3vw, 12px);
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: opacity 0.18s, background 0.18s;
+  white-space: nowrap;
+  user-select: none;
+  line-height: 1;
+}
+.toggle-btn .swatch {
+  width: 18px;
+  height: 3px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.toggle-btn.off { opacity: 0.32; }
+.toggle-btn:hover { opacity: 1 !important; background: rgba(0,0,0,0.03); }
+
+/* ─── CHART + SIDE PANEL ────────────────────────────────────────── */
+.chart-section {
+  display: grid;
+  grid-template-columns: 1fr 210px;
+}
+@media (max-width: 660px) {
+  .chart-section {
+    grid-template-columns: 1fr;
+  }
+  .side-panel {
+    border-left: none !important;
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .side-panel .divider { display: none; }
+  .side-panel .insight-box { grid-column: 1 / -1; }
+}
+
+.chart-container {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(12px, 2vw, 20px) 0 clamp(8px, 1vw, 12px) 0;
+  min-width: 0;
+}
+.chart-container svg { display: block; width: 100%; }
+
+/* ─── SIDE PANEL ────────────────────────────────────────────────── */
+.side-panel {
+  border-left: 1px solid var(--border);
+  padding: clamp(14px, 2vw, 20px) clamp(12px, 1.5vw, 18px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+.panel-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(8px, 1vw, 10px);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 2px;
+}
+.readout-n {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(16px, 2.5vw, 22px);
+  font-weight: 500;
+  color: var(--text);
+}
+.zone-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: clamp(10px, 1.2vw, 12px);
+  font-weight: 500;
+  background: var(--light);
+  color: var(--text);
+  border: 1px solid transparent;
+}
+.zone-desc-text {
+  font-size: clamp(10px, 1.2vw, 11.5px);
+  color: var(--muted);
+  line-height: 1.55;
+  margin-top: 4px;
+}
+.readout-grid { display: flex; flex-direction: column; gap: 9px; }
+.readout-row { display: flex; flex-direction: column; gap: 1px; }
+.readout-label {
+  font-size: clamp(9px, 1.1vw, 10.5px);
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.readout-swatch {
+  width: 11px; height: 11px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.readout-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(12px, 1.6vw, 14px);
+  font-weight: 500;
+  color: var(--text);
+}
+.readout-val.positive { color: #009e73; }
+.readout-val.negative { color: #d55e00; }
+.divider { height: 1px; background: var(--border); flex-shrink: 0; }
+.insight-box {
+  background: var(--light);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+}
+.insight-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(8px, 1vw, 9.5px);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 5px;
+}
+
+/* ─── ZONES STRIP ───────────────────────────────────────────────── */
+.zones-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--border);
+}
+@media (max-width: 580px) {
+  .zones-strip { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 340px) {
+  .zones-strip { grid-template-columns: 1fr; }
+}
+.zone-cell {
+  padding: clamp(10px, 1.5vw, 14px) clamp(12px, 2vw, 16px);
+  border-right: 1px solid var(--border);
+}
+.zone-cell:last-child { border-right: none; }
+.zone-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(8px, 1vw, 9px);
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+.zone-cell-title {
+  font-size: clamp(11px, 1.5vw, 13px);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.zone-cell-desc {
+  font-size: clamp(10px, 1.2vw, 11px);
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ─── FORMULAS ──────────────────────────────────────────────────── */
+.formulas-section {
+  padding: clamp(16px, 2.5vw, 20px) clamp(16px, 4vw, 36px) clamp(18px, 2.5vw, 24px);
+  border-top: 1px solid var(--border);
+  background: var(--light);
+}
+.formulas-header {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(9px, 1.1vw, 10px);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+.formulas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(140px, 30%, 200px), 1fr));
+  gap: 10px;
+}
+.formula-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: clamp(10px, 1.5vw, 12px) clamp(10px, 1.5vw, 14px);
+}
+.f-label {
+  font-size: clamp(9px, 1.1vw, 10.5px);
+  color: var(--muted);
+  margin-bottom: 5px;
+}
+.f-eq {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(10px, 1.3vw, 12px);
+  color: var(--text);
+  line-height: 1.6;
+}
+.f-eq .hl  { color: #0072b2; font-weight: 500; }
+.f-eq .hl2 { color: #d55e00; font-weight: 500; }
+
+/* ─── FOOTER ────────────────────────────────────────────────────── */
+.fig-footer {
+  padding: clamp(14px, 2vw, 20px) clamp(16px, 4vw, 36px);
+  border-top: 2px solid var(--border);
+  background: var(--light);
+  border-radius: 0 0 12px 12px;
+}
+.fig-footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.fig-source {
+  font-size: clamp(9px, 1.1vw, 11px);
+  color: var(--muted);
+  line-height: 1.5;
+}
+.fig-note {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(9px, 1vw, 10px);
+  color: var(--muted);
+  white-space: nowrap;
+}
+.fig-note-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  text-decoration: none;
+}
+.fig-note-link:hover { color: #0072b2; }
+.fig-note-link svg {
+  width: 13px;
+  height: 13px;
+  fill: currentColor;
+}
+
+/* References section */
+.fig-refs {
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+}
+.fig-refs-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.fig-refs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 6px 24px;
+}
+.fig-ref-item {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+.fig-ref-num {
+  font-size: 9px;
+  font-family: 'JetBrains Mono', monospace;
+  color: #0072b2;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 2px;
+  width: 18px;
+}
+.fig-ref-text {
+  font-size: clamp(8.5px, 1vw, 10px);
+  color: var(--muted);
+  line-height: 1.55;
+}
+.fig-ref-text a {
+  color: #0072b2;
+  text-decoration: none;
+  word-break: break-all;
+}
+.fig-ref-text a:hover { text-decoration: underline; }
+.ref-tag {
+  display: inline-block;
+  font-size: 8px;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  padding: 1px 4px;
+  border-radius: 3px;
+  vertical-align: middle;
+  margin-right: 2px;
+  letter-spacing: 0.04em;
+}
+.ref-tag.econ  { background: rgba(0,114,178,0.1); color: #0072b2; }
+.ref-tag.finops { background: rgba(0,158,115,0.1); color: #009e73; }
+.ref-tag.cloud  { background: rgba(213,94,0,0.1); color: #d55e00; }
+
+/* ─── CALCULATOR SECTION ────────────────────────────────────────── */
+.calc-section {
+  border-top: 2px solid var(--border);
+}
+
+/* Header */
+.calc-header {
+  padding: clamp(16px,2.5vw,24px) clamp(16px,4vw,36px) clamp(12px,1.8vw,18px);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+.calc-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.calc-title {
+  font-family: 'Source Serif 4', serif;
+  font-size: clamp(16px, 2.2vw, 22px);
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+.calc-subtitle {
+  font-size: clamp(11px, 1.3vw, 13px);
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 600px;
+}
+.badge-calc {
+  display: inline-block;
+  background: rgba(0,114,178,0.1);
+  color: #0072b2;
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-size: 10px;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+}
+.reset-btn {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 12px;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: all 0.18s;
+  white-space: nowrap;
+  display: flex; align-items: center; gap: 6px;
+}
+.reset-btn:hover { border-color: #d55e00; color: #d55e00; background: rgba(213,94,0,0.04); }
+
+/* Body wrapper */
+.calc-body {
+  padding: clamp(16px,2.5vw,24px) clamp(16px,4vw,36px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: #f4f2ee;
+}
+
+/* ── Step groups ── */
+.calc-group {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.calc-group-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 18px;
+  background: var(--light);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.calc-group-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--text);
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.calc-group-label {
+  font-size: clamp(12px, 1.5vw, 14px);
+  font-weight: 600;
+  color: var(--text);
+}
+.calc-group-hint {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+/* ── Input fields grid ── */
+.calc-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 0;
+}
+.calc-field {
+  padding: clamp(14px,2vw,18px) clamp(14px,1.8vw,18px);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  transition: background 0.2s;
+}
+.calc-field:nth-last-child(-n+4):nth-child(4n+1),
+.calc-field:last-child { border-right: none; }
+@media (max-width: 600px) { .calc-field { border-right: none; } }
+
+.calc-field.has-value { background: rgba(0,114,178,0.025); }
+.calc-field.has-value::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: #0072b2;
+  border-radius: 0 0 0 12px;
+}
+
+/* Field label row */
+.calc-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  font-size: clamp(11px, 1.35vw, 13px);
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 9px;
+  cursor: default;
+  line-height: 1.3;
+}
+.ftag {
+  font-size: 9px;
+  font-weight: 500;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--muted);
+  background: var(--light);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 5px;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+/* Input box */
+.calc-input-wrap {
+  display: flex;
+  align-items: stretch;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--surface);
+  transition: border-color 0.18s, box-shadow 0.18s;
+  height: 38px;
+}
+.calc-input-wrap:focus-within {
+  border-color: #0072b2;
+  box-shadow: 0 0 0 3px rgba(0,114,178,0.12);
+}
+.calc-input-wrap input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  padding: 0 10px;
+  font-size: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+  color: var(--text);
+  background: transparent;
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+.calc-input-wrap input::-webkit-inner-spin-button,
+.calc-input-wrap input::-webkit-outer-spin-button { -webkit-appearance: none; }
+.calc-input-wrap input::placeholder { color: #ccc; font-weight: 400; font-size: 13px; }
+.calc-unit {
+  padding: 0 10px;
+  font-size: 10.5px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--muted);
+  background: var(--light);
+  border-left: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.calc-hint {
+  margin-top: 7px;
+  font-size: 10.5px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+/* ── Output cards ── */
+.calc-outputs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 16px 18px;
+}
+@media (max-width: 700px) { .calc-outputs { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 420px) { .calc-outputs { grid-template-columns: 1fr; } }
+
+.calc-out-card {
+  background: var(--light);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 13px 14px 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  overflow: hidden;
+  transition: border-color 0.22s, background 0.22s, box-shadow 0.22s;
+}
+.calc-out-card.live {
+  border-color: #009e73;
+  background: rgba(0,158,115,0.05);
+  box-shadow: 0 0 0 1px rgba(0,158,115,0.15);
+}
+.calc-out-card.live-warn {
+  border-color: #e69f00;
+  background: rgba(230,159,0,0.05);
+  box-shadow: 0 0 0 1px rgba(230,159,0,0.15);
+}
+.calc-out-card.live-bad {
+  border-color: #d55e00;
+  background: rgba(213,94,0,0.05);
+  box-shadow: 0 0 0 1px rgba(213,94,0,0.15);
+}
+
+.calc-out-label {
+  font-size: 9.5px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* THE FIX: value can never overflow its box */
+.calc-out-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(14px, 2vw, 18px);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+.calc-out-val.good { color: #009e73; }
+.calc-out-val.warn { color: #b07800; }
+.calc-out-val.bad  { color: #d55e00; }
+.calc-out-val.muted { color: var(--muted); font-weight: 400; font-size: 13px; }
+
+.calc-out-sub {
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.4;
+  margin-top: 1px;
+}
+
+/* Status bar */
+.calc-status-bar {
+  padding: 0 18px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 28px;
+}
+.calc-status-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #ccc;
+  flex-shrink: 0;
+  transition: background 0.3s;
+}
+.calc-status-dot.active { background: #009e73; }
+.calc-status-text {
+  font-size: 11px;
+  color: var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+  transition: color 0.3s;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.calc-status-text.active { color: #009e73; }
+
+.calc-out-card.needs-data {
+  border-color: var(--border);
+  background: var(--light);
+  opacity: 0.75;
+}
+.calc-out-card.needs-data .calc-out-label { color: var(--muted); }
+.calc-out-card.needs-data .calc-out-sub {
+  color: #b07800;
+  font-style: italic;
+}
+
+/* Progress pills — show how many fields are filled */
+.calc-progress {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 0 18px 14px;
+}
+.cp-label { font-size: 10px; color: var(--muted); margin-right: 4px; }
+.cp-pill {
+  width: 28px; height: 5px;
+  border-radius: 3px;
+  background: var(--border);
+  transition: background 0.3s;
+}
+.cp-pill.filled { background: #0072b2; }
+
+
+/* ── GROUP D: PROVIDERS ── */
+.provider-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  padding: 16px 18px;
+}
+.provider-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 11px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  background: #faf9f7;
+  color: #575b66;
+  font-size: clamp(11px, 1.25vw, 13px);
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+.provider-btn:hover {
+  border-color: #5a5a8a;
+  color: #5a5a8a;
+  background: rgba(90,90,138,0.07);
+}
+.provider-btn.selected {
+  border-color: #5a5a8a;
+  color: #42426d;
+  background: rgba(90,90,138,0.12);
+  box-shadow: 0 0 0 2px rgba(90,90,138,0.15);
+}
+.provider-btn .check {
+  display: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #5a5a8a;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  line-height: 16px;
+  text-align: center;
+  margin-left: auto;
+}
+.provider-btn.selected .check { display: inline-block; }
+.provider-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.provider-logo {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  flex-shrink: 0;
+}
+.provider-logo.aws { background: #232f3e; color: #ff9900; }
+.provider-logo.azure { background: #0078d4; color: #fff; }
+.provider-logo.gcp {
+  color: #fff;
+  background: conic-gradient(#ea4335 0 25%, #fbbc05 25% 50%, #34a853 50% 75%, #4285f4 75% 100%);
+}
+.provider-logo.oci { background: #c74634; color: #fff; }
+.provider-logo.ibm { background: #052fad; color: #fff; }
+.provider-logo.alibaba { background: #ff6a00; color: #fff; }
+.provider-logo.huawei { background: #cf0a2c; color: #fff; }
+.provider-logo.multi { background: #5a5a8a; color: #fff; }
+
+/* ── GROUP E: HEALTH + RECOMMENDATIONS ── */
+.health-wrap {
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.health-banner {
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  background: var(--light);
+  padding: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.health-banner.awaiting { border-color: var(--border); }
+.health-banner.green {
+  border-color: #009e73;
+  background: rgba(0,158,115,0.08);
+}
+.health-banner.yellow {
+  border-color: #e69f00;
+  background: rgba(230,159,0,0.08);
+}
+.health-banner.red {
+  border-color: #d55e00;
+  background: rgba(213,94,0,0.08);
+}
+.health-zone-title {
+  font-size: clamp(14px, 1.7vw, 18px);
+  font-weight: 700;
+  line-height: 1.25;
+}
+.health-zone-desc {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: clamp(11px, 1.3vw, 13px);
+  line-height: 1.55;
+  max-width: 760px;
+}
+.health-score {
+  min-width: 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.health-score-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.11em;
+  color: var(--muted);
+}
+.health-score-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.rec-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 10px;
+}
+.rec-card {
+  border: 1.5px solid var(--border);
+  border-radius: 11px;
+  background: #fbfaf8;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.rec-card.high { border-left: 4px solid #d55e00; }
+.rec-card.medium { border-left: 4px solid #e69f00; }
+.rec-card.low { border-left: 4px solid #009e73; }
+
+.rec-head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.rec-icon { font-size: 15px; }
+.rec-title {
+  font-size: clamp(12px, 1.35vw, 13px);
+  font-weight: 600;
+  color: var(--text);
+}
+.rec-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 1px 5px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  background: #fff;
+}
+.rec-tag.priority-high { color: #d55e00; border-color: rgba(213,94,0,0.4); background: rgba(213,94,0,0.1); }
+.rec-tag.priority-medium { color: #b07800; border-color: rgba(176,120,0,0.4); background: rgba(230,159,0,0.1); }
+.rec-tag.priority-low { color: #009e73; border-color: rgba(0,158,115,0.4); background: rgba(0,158,115,0.1); }
+
+.rec-desc {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.55;
+}
+.rec-action {
+  font-size: 11px;
+  color: #2a2f44;
+  line-height: 1.45;
+}
+.rec-empty {
+  grid-column: 1 / -1;
+  padding: 11px 12px;
+  border-radius: 9px;
+  border: 1px dashed var(--border);
+  color: var(--muted);
+  font-size: 11px;
+  background: #faf9f7;
+}
+
+
+/* ─── FORMULA CARD TOOLTIPS ─────────────────────────────────────── */
+.formula-card {
+  position: relative;
+  cursor: pointer;
+  transition: box-shadow 0.18s, border-color 0.18s;
+}
+.formula-card:hover,
+.formula-card.active {
+  border-color: #0072b2;
+  box-shadow: 0 0 0 3px rgba(0,114,178,0.1);
+}
+.formula-card .info-btn {
+  position: absolute;
+  top: 8px; right: 8px;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--light);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  user-select: none;
+  flex-shrink: 0;
+}
+.formula-card:hover .info-btn,
+.formula-card.active .info-btn {
+  background: #0072b2;
+  color: white;
+  border-color: #0072b2;
+}
+
+/* Tooltip panel */
+.ftip {
+  display: none;
+  position: absolute;
+  z-index: 100;
+  bottom: calc(100% + 10px);
+  left: 0;
+  width: clamp(220px, 32vw, 320px);
+  background: #fff;
+  border: 1.5px solid #0072b2;
+  border-radius: 10px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.13);
+  padding: 14px 16px 12px;
+  pointer-events: none;
+}
+.ftip.open { display: block; }
+
+/* Flip tooltip to below if card is in top half */
+.formula-card.flip-down .ftip {
+  bottom: auto;
+  top: calc(100% + 10px);
+}
+
+/* Arrow */
+.ftip::before {
+  content: '';
+  position: absolute;
+  bottom: -7px; left: 20px;
+  width: 12px; height: 12px;
+  background: #fff;
+  border-right: 1.5px solid #0072b2;
+  border-bottom: 1.5px solid #0072b2;
+  transform: rotate(45deg);
+}
+.formula-card.flip-down .ftip::before {
+  bottom: auto;
+  top: -7px;
+  border-right: none; border-bottom: none;
+  border-left: 1.5px solid #0072b2;
+  border-top: 1.5px solid #0072b2;
+}
+
+.ftip-title {
+  font-family: 'Source Serif 4', serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.ftip-desc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+.ftip-vars {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border-top: 1px solid var(--border);
+  padding-top: 9px;
+}
+.ftip-var {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px;
+  align-items: baseline;
+}
+.ftip-sym {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  color: #0072b2;
+  white-space: nowrap;
+}
+.ftip-sym.hl2 { color: #d55e00; }
+.ftip-def {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>Duksh K.</h1>
-        
-        <p>
-            Cloud FinOps Specialist passionate about optimizing cloud infrastructure
-            and driving cost-efficient cloud architectures.
-        </p>
-        
-        <div class="social-links">
-            <a href="https://github.com/duksh" target="_blank" rel="noopener">GitHub</a>
-            <a href="https://www.linkedin.com/in/duksh/" target="_blank" rel="noopener">LinkedIn</a>
-        </div>
-        
-        <p>
-            I'm passionate about experimenting with <span class="highlight">FinOps optimized cloud solutions</span> 
-            on Google Cloud Platform (GCP) and Amazon Web Services (AWS).
-        </p>
-        
-        <p>
-            My focus is on developing cost-effective cloud architectures that maintain 
-            high performance while optimizing resource utilization and expenditure.
-        </p>
-        
-        <h2>Featured Projects</h2>
-        
-        <div class="project">
-            <h3>OpenOps Helm Chart</h3>
-            <p>
-                A Helm chart for deploying the OpenOps FinOps automation platform to Kubernetes environments.
-                This project provides a complete Kubernetes deployment solution with configurable resources,
-                services, secrets management, and persistent storage.
-            </p>
-            <div class="project-links">
-                <a href="https://github.com/duksh/openops-helm-chart" target="_blank" rel="noopener">GitHub Repository</a>
-                <a href="https://github.com/duksh/openops-helm-chart/tags" target="_blank" rel="noopener">Tagged Versions</a>
-            </div>
-            <p><strong>Key Features:</strong></p>
-            <ul>
-                <li>Customizable deployment configuration for different environments</li>
-                <li>Secure secrets management integration</li>
-                <li>Persistent volume integration for data storage</li>
-                <li>Automated GitHub Actions workflow for chart releases</li>
-                <li>GitHub Pages-based Helm repository for easy installation</li>
-            </ul>
-            <div class="tags">
-                <span class="tag">Kubernetes</span>
-                <span class="tag">Helm</span>
-                <span class="tag">FinOps</span>
-                <span class="tag">GitHub Actions</span>
-                <span class="tag">OpenOps</span>
-            </div>
-        </div>
-        
-        <h2>More Projects Coming Soon</h2>
-        <p>
-            I'm working on adding more details about my projects and technical skills.
-            Check back soon for updates on my cloud cost optimization work.
-        </p>
+<div class="paper">
+
+  <!-- LANDING INTRO -->
+  <section class="landing-intro">
+    <div class="landing-kicker">FinOps &amp; Cloud Economics Calculator by Duksh</div>
+    <h1 class="landing-title">A practical FinOps calculator to quantify break-even, pricing floor, and cloud efficiency before you scale.</h1>
+    <p class="landing-subtitle">
+      This page combines a live calculator and an interactive economics visualization to help teams convert cloud spend into clear operating decisions.
+      Enter a few inputs and immediately see viability thresholds, contribution margin, CCER posture, and recommendation-driven next actions.
+    </p>
+
+    <div class="landing-grid">
+      <article class="landing-card">
+        <h2 class="landing-card-title">What this tool provides</h2>
+        <ul class="landing-card-list">
+          <li>Instant break-even and minimum viable client projections.</li>
+          <li>Per-client cost and minimum pricing guardrails.</li>
+          <li>Provider-aware recommendations based on health zone signals.</li>
+        </ul>
+        <a class="landing-card-link" href="#calculator-section">Go to Calculator &darr;</a>
+      </article>
+
+      <article class="landing-card">
+        <h2 class="landing-card-title">Features &amp; advantages</h2>
+        <ul class="landing-card-list">
+          <li>Real-time recalculation with no refresh cycle or tooling setup.</li>
+          <li>Zone-based visual storytelling for strategy and stakeholder alignment.</li>
+          <li>Academic formula transparency to support credibility and governance.</li>
+        </ul>
+        <a class="landing-card-link features" href="#chart-section">Go to Chart &darr;</a>
+      </article>
+
+      <article class="landing-card">
+        <h2 class="landing-card-title">Target users</h2>
+        <ul class="landing-card-list">
+          <li>FinOps practitioners and cloud cost optimization teams.</li>
+          <li>SaaS founders, product leaders, and cloud solution architects.</li>
+          <li>CTOs, CFOs, and operations teams validating unit economics at scale.</li>
+        </ul>
+        <a class="landing-card-link users" href="#formulas-section">Go to Formulas &darr;</a>
+      </article>
     </div>
-    
-    <div class="footer">
-        <p>&copy; 2025 | Duksh K.</p>
+  </section>
+
+  <!-- CREDIBILITY -->
+  <section class="credibility-section">
+    <div class="cred-avatar">
+      <img src="https://avatars.githubusercontent.com/u/586947?v=4" alt="Duksh Koonjoobeeharry profile photo">
     </div>
+    <div class="cred-content">
+      <div class="cred-kicker">Built by</div>
+      <h2 class="cred-title">Duksh Koonjoobeeharry — FinOps &amp; AWS/GCP Cloud Solution Developer, DBA Researcher</h2>
+      <p class="cred-text">
+        I design cloud-financial models and architecture strategies that connect technical decisions to business outcomes.
+        This calculator reflects practical FinOps implementation, multi-cloud design thinking, and research-backed cost modelling for real-world decision support.
+      </p>
+      <div class="cred-links">
+        <a class="cred-link" href="https://www.linkedin.com/in/duksh/" target="_blank" rel="noopener noreferrer">LinkedIn · duksh</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-band">
+    <button class="cta-btn" onclick="document.getElementById('calculator-section').scrollIntoView({behavior:'smooth', block:'start'})">Get Started — Open the FinOps Calculator</button>
+  </div>
+
+  <!-- HEADER -->
+  <div class="fig-header">
+    <div class="fig-label">Figure 1 · Interactive Cost &amp; Profitability Curves</div>
+    <h1 class="fig-title">Cloud Economics Visualization — Explore Scale, Cost Curves, and Profitability Thresholds</h1>
+    <p class="fig-caption">Use this section after filling the calculator to inspect how development decay, infrastructure growth, CUD effects, and pricing floors evolve across client volume. Hover over the chart to inspect values at any point.</p>
+  </div>
+
+  <!-- CONTROLS -->
+  <div class="controls">
+    <span class="controls-label">SHOW/HIDE:</span>
+    <div class="btns-wrap">
+      <button class="toggle-btn" id="btn-dev"       onclick="toggle('dev')"       style="color:var(--dev);      border-color:var(--dev)"><span class="swatch" style="background:var(--dev)"></span>Dev Cost / Client</button>
+      <button class="toggle-btn" id="btn-infra-raw" onclick="toggle('infra-raw')" style="color:var(--infra-raw);border-color:var(--infra-raw)"><span class="swatch" style="background:var(--infra-raw)"></span>Infra (On-Demand)</button>
+      <button class="toggle-btn" id="btn-infra-cud" onclick="toggle('infra-cud')" style="color:var(--infra-cud);border-color:var(--infra-cud)"><span class="swatch" style="background:linear-gradient(90deg,var(--infra-cud) 55%,transparent 55%) repeat-x left/9px 3px"></span>Infra (With CUDs)</button>
+      <button class="toggle-btn" id="btn-total"     onclick="toggle('total')"     style="color:var(--total);    border-color:var(--total)"><span class="swatch" style="background:var(--total)"></span>Total Cost / Client</button>
+      <button class="toggle-btn" id="btn-revenue"   onclick="toggle('revenue')"   style="color:var(--revenue);  border-color:var(--revenue)"><span class="swatch" style="background:var(--revenue)"></span>Revenue</button>
+      <button class="toggle-btn" id="btn-profit"    onclick="toggle('profit')"    style="color:var(--profit);   border-color:var(--profit)"><span class="swatch" style="background:linear-gradient(90deg,var(--profit) 60%,transparent 60%) repeat-x left/10px 3px"></span>Profit / ROI</button>
+      <button class="toggle-btn" id="btn-price-min" onclick="toggle('price-min')" style="color:var(--price-min);border-color:var(--price-min)"><span class="swatch" style="background:linear-gradient(90deg,var(--price-min) 40%,transparent 40%) repeat-x left/7px 3px"></span>Min. Price / Client</button>
+    </div>
+  </div>
+
+  <!-- CHART + SIDE PANEL -->
+  <div class="chart-section" id="chart-section">
+    <div class="chart-container" id="chart-container">
+      <svg id="chart"></svg>
+    </div>
+    <div class="side-panel">
+      <div>
+        <div class="panel-title">Client Count</div>
+        <div class="readout-n" id="sp-n">— clients</div>
+      </div>
+      <div class="divider"></div>
+      <div>
+        <div class="panel-title">Current Zone</div>
+        <div id="sp-zone-badge" class="zone-badge">Hover chart →</div>
+        <div id="sp-zone-desc" class="zone-desc-text"></div>
+      </div>
+      <div class="divider"></div>
+      <div class="readout-grid">
+        <div class="readout-row">
+          <div class="readout-label"><span class="readout-swatch" style="background:var(--dev)"></span>Dev Cost / Client</div>
+          <div class="readout-val" id="sp-dev">—</div>
+        </div>
+        <div class="readout-row">
+          <div class="readout-label"><span class="readout-swatch" style="background:var(--infra-raw)"></span>Infra (On-Demand)</div>
+          <div class="readout-val" id="sp-infra-raw">—</div>
+        </div>
+        <div class="readout-row">
+          <div class="readout-label"><span class="readout-swatch" style="background:var(--infra-cud)"></span>Infra (CUDs)</div>
+          <div class="readout-val" id="sp-infra-cud">—</div>
+        </div>
+        <div class="readout-row">
+          <div class="readout-label"><span class="readout-swatch" style="background:var(--total)"></span>Total Cost / Client</div>
+          <div class="readout-val" id="sp-total">—</div>
+        </div>
+        <div class="readout-row">
+          <div class="readout-label"><span class="readout-swatch" style="background:var(--revenue)"></span>Revenue</div>
+          <div class="readout-val" id="sp-revenue">—</div>
+        </div>
+        <div class="readout-row">
+          <div class="readout-label"><span class="readout-swatch" style="background:var(--profit)"></span>Profit / Loss</div>
+          <div class="readout-val" id="sp-profit">—</div>
+        </div>
+        <div class="readout-row">
+          <div class="readout-label"><span class="readout-swatch" style="background:var(--price-min);border:1px solid #bbb"></span>Min. Price / Client</div>
+          <div class="readout-val" id="sp-price-min">—</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="insight-box">
+        <div class="insight-label">Key Insight</div>
+        <div id="sp-insight" class="zone-desc-text">Move cursor over chart to see contextual insights.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ZONES STRIP -->
+  <div class="zones-strip">
+    <div class="zone-cell">
+      <div class="zone-num">Zone I</div>
+      <div class="zone-cell-title" style="color:var(--dev)">Loss Zone</div>
+      <div class="zone-cell-desc">Fixed costs dominate. Revenue cannot cover total cost of service. Below minimum viable scale.</div>
+    </div>
+    <div class="zone-cell">
+      <div class="zone-num">Threshold</div>
+      <div class="zone-cell-title" style="color:var(--total)">Break-Even</div>
+      <div class="zone-cell-desc">N<sub>min</sub> = Fixed Cost ÷ (ARPU − VCPU). Minimum clients for sustainable operations.</div>
+    </div>
+    <div class="zone-cell">
+      <div class="zone-num">Zone III</div>
+      <div class="zone-cell-title" style="color:var(--profit)">ROI Sweet Spot</div>
+      <div class="zone-cell-desc">Economies of scale reduce per-client dev cost while infra scales efficiently with CUDs.</div>
+    </div>
+    <div class="zone-cell">
+      <div class="zone-num">Zone IV</div>
+      <div class="zone-cell-title" style="color:var(--revenue)">Margin Compression</div>
+      <div class="zone-cell-desc">Infra cost growth outpaces revenue. Trigger: CUD renegotiation, right-sizing, or architecture review.</div>
+    </div>
+  </div>
+
+  <!-- ═══ LIVE CALCULATOR ════════════════════════════════════════ -->
+  <div class="calc-section" id="calculator-section">
+    <div class="calc-header">
+      <div class="calc-title-row">
+        <div>
+          <div class="fig-label" style="margin-bottom:5px">⚙︎ Interactive Model — Live Parameter Calculator</div>
+          <h2 class="calc-title">Enter what you know. I'll calculate the rest for you.</h2>
+          <p class="calc-subtitle">Type in any business figure and the model instantly derives all other parameters and <strong>redraws the chart</strong>. Fields show <span class="badge-calc">calculated</span> when auto-derived from your inputs.</p>
+        </div>
+        <button class="reset-btn" onclick="resetModel()">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 6A5 5 0 1 0 3 2.5"/><polyline points="1,1 1,4 4,4"/></svg>
+          Reset defaults
+        </button>
+      </div>
+    </div>
+
+    <div class="calc-body">
+
+      <!-- ── GROUP A ──────────────────────────────────────────── -->
+      <div class="calc-group">
+        <div class="calc-group-title">
+          <span class="calc-group-num">A</span>
+          <span class="calc-group-label">Your Current Business Snapshot</span>
+          <span class="calc-group-hint">Start here — enter what you already know</span>
+        </div>
+        <div class="calc-fields">
+
+          <div class="calc-field" id="field-nRef">
+            <label class="calc-label" for="inp-nRef">
+              Current Client Count
+              <span class="ftag">reference&nbsp;n</span>
+            </label>
+            <div class="calc-input-wrap">
+              <input type="number" id="inp-nRef" inputmode="numeric" min="1" max="100000" step="1" placeholder="e.g. 100" oninput="onInput('nRef')">
+              <span class="calc-unit">clients</span>
+            </div>
+            <div class="calc-hint">How many clients right now? All curves calibrate from this point.</div>
+          </div>
+
+          <div class="calc-field" id="field-devPerClient">
+            <label class="calc-label" for="inp-devPerClient">
+              Dev Cost / Client
+              <span class="ftag" style="color:var(--dev);border-color:var(--dev);background:rgba(213,94,0,0.06)">● orange curve</span>
+            </label>
+            <div class="calc-input-wrap">
+              <input type="number" id="inp-devPerClient" inputmode="decimal" min="0" step="1" placeholder="e.g. 500" oninput="onInput('devPerClient')">
+              <span class="calc-unit">€ / client</span>
+            </div>
+            <div class="calc-hint">Your dev cost per client at n. Derives <strong>K</strong> (platform build constant).</div>
+          </div>
+
+          <div class="calc-field" id="field-infraTotal">
+            <label class="calc-label" for="inp-infraTotal">
+              Total Infra Cost
+              <span class="ftag" style="color:var(--infra-raw);border-color:var(--infra-raw);background:rgba(0,158,115,0.06)">● green curve</span>
+            </label>
+            <div class="calc-input-wrap">
+              <input type="number" id="inp-infraTotal" inputmode="decimal" min="0" step="1" placeholder="e.g. 2400" oninput="onInput('infraTotal')">
+              <span class="calc-unit">€ / month</span>
+            </div>
+            <div class="calc-hint">Your current total cloud bill at n. Derives <strong>c</strong> (infra base coefficient).</div>
+          </div>
+
+          <div class="calc-field" id="field-ARPU">
+            <label class="calc-label" for="inp-ARPU">
+              Revenue / Client (ARPU)
+              <span class="ftag" style="color:var(--revenue);border-color:var(--revenue);background:rgba(0,114,178,0.06)">● blue line</span>
+            </label>
+            <div class="calc-input-wrap">
+              <input type="number" id="inp-ARPU" inputmode="decimal" min="0" step="0.01" placeholder="e.g. 30" oninput="onInput('ARPU')">
+              <span class="calc-unit">€ / client</span>
+            </div>
+            <div class="calc-hint">Average monthly revenue per client. Shifts the entire revenue line.</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── GROUP B ──────────────────────────────────────────── -->
+      <div class="calc-group">
+        <div class="calc-group-title">
+          <span class="calc-group-num" style="background:#888">B</span>
+          <span class="calc-group-label">Optional — Fine-Tune the Model</span>
+          <span class="calc-group-hint">Leave blank to use smart defaults</span>
+        </div>
+        <div class="calc-fields">
+
+          <div class="calc-field" id="field-cudPct">
+            <label class="calc-label" for="inp-cudPct">
+              CUD Discount
+              <span class="ftag" style="color:var(--infra-cud);border-color:var(--infra-cud);background:rgba(0,158,115,0.08)">-- dashed green</span>
+            </label>
+            <div class="calc-input-wrap">
+              <input type="number" id="inp-cudPct" inputmode="numeric" min="0" max="100" step="1" placeholder="32" oninput="onInput('cudPct')">
+              <span class="calc-unit">%</span>
+            </div>
+            <div class="calc-hint">Your CUD / Savings Plan rate. Default: 32%. GCP typically 20–55%.</div>
+          </div>
+
+          <div class="calc-field" id="field-margin">
+            <label class="calc-label" for="inp-margin">
+              Target Margin
+              <span class="ftag">min price line</span>
+            </label>
+            <div class="calc-input-wrap">
+              <input type="number" id="inp-margin" inputmode="numeric" min="0" max="100" step="1" placeholder="15" oninput="onInput('margin')">
+              <span class="calc-unit">%</span>
+            </div>
+            <div class="calc-hint">Profit margin above cost recovery per client. Default: 15%.</div>
+          </div>
+
+          <div class="calc-field" id="field-nMax">
+            <label class="calc-label" for="inp-nMax">
+              Chart Scale (max n)
+              <span class="ftag">x-axis</span>
+            </label>
+            <div class="calc-input-wrap">
+              <input type="number" id="inp-nMax" inputmode="numeric" min="10" max="100000" step="10" placeholder="1000" oninput="onInput('nMax')">
+              <span class="calc-unit">clients</span>
+            </div>
+            <div class="calc-hint">Max clients on the x-axis. Zoom out for large-scale projections.</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── GROUP C ──────────────────────────────────────────── -->
+      <div class="calc-group">
+        <div class="calc-group-title">
+          <span class="calc-group-num" style="background:#009e73">C</span>
+          <span class="calc-group-label">Auto-Calculated Results</span>
+          <span class="calc-group-hint">Updates instantly as you type</span>
+        </div>
+
+        <div class="calc-outputs">
+
+          <div class="calc-out-card" id="out-beN">
+            <div class="calc-out-label">Break-Even Clients</div>
+            <div class="calc-out-val muted" id="oval-beN">—</div>
+            <div class="calc-out-sub">Minimum clients to cover all costs</div>
+          </div>
+
+          <div class="calc-out-card" id="out-minPrice">
+            <div class="calc-out-label">Min. Price / Client</div>
+            <div class="calc-out-val muted" id="oval-minPrice">—</div>
+            <div class="calc-out-sub">Floor price at your current n</div>
+          </div>
+
+          <div class="calc-out-card" id="out-vcpu">
+            <div class="calc-out-label">VCPU at n</div>
+            <div class="calc-out-val muted" id="oval-vcpu">—</div>
+            <div class="calc-out-sub">Variable Cost Per User (infra ÷ n)</div>
+          </div>
+
+          <div class="calc-out-card" id="out-margin">
+            <div class="calc-out-label">Contribution Margin</div>
+            <div class="calc-out-val muted" id="oval-margin">—</div>
+            <div class="calc-out-sub">ARPU − VCPU per client</div>
+          </div>
+
+          <div class="calc-out-card" id="out-ccer">
+            <div class="calc-out-label">CCER at n</div>
+            <div class="calc-out-val muted" id="oval-ccer">—</div>
+            <div class="calc-out-sub">Revenue ÷ Cloud Spend (target &gt; 3×)</div>
+          </div>
+
+          <div class="calc-out-card" id="out-cudSave">
+            <div class="calc-out-label">CUD Monthly Saving</div>
+            <div class="calc-out-val muted" id="oval-cudSave">—</div>
+            <div class="calc-out-sub">On-demand vs committed at n</div>
+          </div>
+
+        </div>
+
+        <!-- Progress + status bar -->
+        <div class="calc-progress" id="calc-progress" style="display:none">
+          <span class="cp-label">INPUTS FILLED</span>
+          <div class="cp-pill" id="cp-0"></div>
+          <div class="cp-pill" id="cp-1"></div>
+          <div class="cp-pill" id="cp-2"></div>
+          <div class="cp-pill" id="cp-3"></div>
+          <div class="cp-pill" id="cp-4"></div>
+          <div class="cp-pill" id="cp-5"></div>
+          <div class="cp-pill" id="cp-6"></div>
+        </div>
+        <div class="calc-status-bar" id="calc-status-bar">
+          <div class="calc-status-dot" id="calc-dot"></div>
+          <span class="calc-status-text" id="calc-status-text">Enter values above to begin</span>
+        </div>
+
+      </div>
+
+      <!-- ── GROUP D ──────────────────────────────────────────── -->
+      <div class="calc-group">
+        <div class="calc-group-title">
+          <span class="calc-group-num" style="background:#5a5a8a">D</span>
+          <span class="calc-group-label">Your Cloud Provider(s)</span>
+          <span class="calc-group-hint">Select one or more providers to personalise recommendations</span>
+        </div>
+        <div class="provider-grid">
+          <button class="provider-btn" data-provider="aws" onclick="toggleProvider('aws')"><span class="provider-logo aws" aria-hidden="true">aws</span><span class="provider-label">AWS</span><span class="check">✓</span></button>
+          <button class="provider-btn" data-provider="azure" onclick="toggleProvider('azure')"><span class="provider-logo azure" aria-hidden="true">az</span><span class="provider-label">Microsoft Azure</span><span class="check">✓</span></button>
+          <button class="provider-btn" data-provider="gcp" onclick="toggleProvider('gcp')"><span class="provider-logo gcp" aria-hidden="true">gcp</span><span class="provider-label">Google Cloud (GCP)</span><span class="check">✓</span></button>
+          <button class="provider-btn" data-provider="oci" onclick="toggleProvider('oci')"><span class="provider-logo oci" aria-hidden="true">oci</span><span class="provider-label">Oracle Cloud (OCI)</span><span class="check">✓</span></button>
+          <button class="provider-btn" data-provider="ibm" onclick="toggleProvider('ibm')"><span class="provider-logo ibm" aria-hidden="true">ibm</span><span class="provider-label">IBM Cloud</span><span class="check">✓</span></button>
+          <button class="provider-btn" data-provider="alibaba" onclick="toggleProvider('alibaba')"><span class="provider-logo alibaba" aria-hidden="true">ali</span><span class="provider-label">Alibaba Cloud</span><span class="check">✓</span></button>
+          <button class="provider-btn" data-provider="huawei" onclick="toggleProvider('huawei')"><span class="provider-logo huawei" aria-hidden="true">hw</span><span class="provider-label">Huawei Cloud</span><span class="check">✓</span></button>
+          <button class="provider-btn" data-provider="multi" onclick="toggleProvider('multi')"><span class="provider-logo multi" aria-hidden="true">∞</span><span class="provider-label">Multi-Cloud</span><span class="check">✓</span></button>
+        </div>
+      </div>
+
+      <!-- ── GROUP E ──────────────────────────────────────────── -->
+      <div class="calc-group" id="group-health">
+        <div class="calc-group-title" id="health-title-row">
+          <span class="calc-group-num" id="health-group-num" style="background:#7a7a8c">E</span>
+          <span class="calc-group-label">Health Zone &amp; Recommendations</span>
+          <span class="calc-group-hint">Live FinOps posture based on break-even, CCER, contribution margin, and commitment coverage</span>
+        </div>
+        <div class="health-wrap">
+          <div class="health-banner awaiting" id="health-banner">
+            <div>
+              <div class="health-zone-title" id="health-zone-title">Awaiting Inputs</div>
+              <div class="health-zone-desc" id="health-zone-desc">Add at least Infra Cost and ARPU to compute your FinOps health zone and recommendations.</div>
+            </div>
+            <div class="health-score">
+              <span class="health-score-label">HEALTH SCORE</span>
+              <span class="health-score-value" id="health-score-value">—</span>
+            </div>
+          </div>
+          <div class="rec-list" id="rec-list">
+            <div class="rec-empty">Recommendations will appear here once enough data is available.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FORMULAS -->
+  <div class="formulas-section" id="formulas-section">
+    <div class="formulas-header">Core FinOps Equations Referenced in Figure 1 — <span style="font-weight:400;letter-spacing:0">click any card for a full explanation</span></div>
+    <div class="formulas-grid">
+
+      <!-- 1 -->
+      <div class="formula-card" onclick="toggleTip(this)">
+        <span class="info-btn">i</span>
+        <div class="f-label">Minimum Viable Clients</div>
+        <div class="f-eq">N<span class="hl">min</span> = FC ÷ (<span class="hl2">ARPU</span> − VCPU)</div>
+        <div class="ftip">
+          <div class="ftip-title">Minimum Viable Clients (N<sub>min</sub>)</div>
+          <div class="ftip-desc">The smallest number of clients a cloud service provider needs to cover all fixed operating costs and break even. Below this threshold, the business runs at a loss regardless of how efficiently the infrastructure is managed.</div>
+          <div class="ftip-vars">
+            <div class="ftip-var"><span class="ftip-sym">N<sub>min</sub></span><span class="ftip-def">Minimum number of clients required to reach break-even</span></div>
+            <div class="ftip-var"><span class="ftip-sym">FC</span><span class="ftip-def">Fixed Costs — recurring costs independent of client count (e.g. base infrastructure, salaries, licences)</span></div>
+            <div class="ftip-var"><span class="ftip-sym hl2">ARPU</span><span class="ftip-def">Average Revenue Per User — the average monthly revenue generated by each client</span></div>
+            <div class="ftip-var"><span class="ftip-sym">VCPU</span><span class="ftip-def">Variable Cost Per User — the cloud infrastructure cost attributable to each individual client</span></div>
+            <div class="ftip-var"><span class="ftip-sym">ARPU − VCPU</span><span class="ftip-def">Contribution Margin — what each new client contributes toward covering fixed costs after paying for their own usage</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="formula-card" onclick="toggleTip(this)">
+        <span class="info-btn">i</span>
+        <div class="f-label">Dev Cost Decay (Economies of Scale)</div>
+        <div class="f-eq">DC(n) = <span class="hl2">K</span> · n<sup>−α</sup>,  α ∈ (0,1)</div>
+        <div class="ftip">
+          <div class="ftip-title">Development Cost Decay</div>
+          <div class="ftip-desc">As you onboard more clients, the fixed development investment (platform build, R&D, engineering) is spread across a larger base — so the cost per client decreases following a power-law decay curve. This is the core driver of the orange curve in the chart.</div>
+          <div class="ftip-vars">
+            <div class="ftip-var"><span class="ftip-sym">DC(n)</span><span class="ftip-def">Development cost per client at scale n</span></div>
+            <div class="ftip-var"><span class="ftip-sym hl2">K</span><span class="ftip-def">Initial development cost constant — the total platform build cost when n = 1</span></div>
+            <div class="ftip-var"><span class="ftip-sym">n</span><span class="ftip-def">Number of clients currently onboarded</span></div>
+            <div class="ftip-var"><span class="ftip-sym">−α</span><span class="ftip-def">Decay exponent (0 &lt; α &lt; 1). Higher α means faster cost reduction per client as scale grows</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="formula-card" onclick="toggleTip(this)">
+        <span class="info-btn">i</span>
+        <div class="f-label">Infra Cost — On-Demand</div>
+        <div class="f-eq">IC(n) = <span class="hl2">c</span> · n<sup>β</sup>,  β &gt; 1</div>
+        <div class="ftip">
+          <div class="ftip-title">Infrastructure Cost (On-Demand Pricing)</div>
+          <div class="ftip-desc">When paying full on-demand cloud rates (no commitments), infrastructure costs grow super-linearly with clients — each new client adds slightly more cost than the previous one due to usage patterns and resource contention. This is the green curve in the chart.</div>
+          <div class="ftip-vars">
+            <div class="ftip-var"><span class="ftip-sym">IC(n)</span><span class="ftip-def">Total infrastructure cost at n clients on on-demand pricing</span></div>
+            <div class="ftip-var"><span class="ftip-sym hl2">c</span><span class="ftip-def">Base cost coefficient — the infrastructure cost for the first client</span></div>
+            <div class="ftip-var"><span class="ftip-sym">β</span><span class="ftip-def">Scaling exponent (β &gt; 1). Represents super-linear growth — each client incrementally increases cost faster than the last</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="formula-card" onclick="toggleTip(this)">
+        <span class="info-btn">i</span>
+        <div class="f-label">Infra Cost — With CUDs</div>
+        <div class="f-eq">IC<span class="hl">cud</span>(n) = γ · c · n<sup>β·0.96</sup></div>
+        <div class="ftip">
+          <div class="ftip-title">Infrastructure Cost with Committed Use Discounts (CUDs)</div>
+          <div class="ftip-desc">By committing to a certain level of cloud resource usage over 1 or 3 years, providers receive significant discounts (typically 20–55% depending on the platform and resource type). This shifts the entire infrastructure cost curve downward — extending the ROI sweet spot to the right. This is the dashed green curve in the chart.</div>
+          <div class="ftip-vars">
+            <div class="ftip-var"><span class="ftip-sym hl2">IC<sub>cud</sub>(n)</span><span class="ftip-def">Infrastructure cost at n clients after applying CUD/Reserved Instance discounts</span></div>
+            <div class="ftip-var"><span class="ftip-sym">IC(n)</span><span class="ftip-def">Baseline on-demand infrastructure cost (from the formula above)</span></div>
+            <div class="ftip-var"><span class="ftip-sym">γ</span><span class="ftip-def">CUD discount factor (0 &lt; γ &lt; 1). A γ of 0.72 means a 28% cost reduction through commitments. Lower γ = deeper discount</span></div>
+            <div class="ftip-var"><span class="ftip-sym">CUDs</span><span class="ftip-def">Committed Use Discounts — GCP's discount model for pre-committing compute resources. AWS equivalent: Savings Plans / Reserved Instances. Azure: Reserved Instances</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="formula-card" onclick="toggleTip(this)">
+        <span class="info-btn">i</span>
+        <div class="f-label">Minimum Price per Client</div>
+        <div class="f-eq">MP(n) = TC(n) · (1 + <span class="hl2">m</span>)</div>
+        <div class="ftip">
+          <div class="ftip-title">Minimum Price per Client (P<sub>min</sub>)</div>
+          <div class="ftip-desc">The floor price a provider must charge each client to remain profitable at a given scale. Pricing below this level leads to operating losses. As n increases, TC(n) often declines in this model due to development cost decay, enabling more competitive pricing while protecting margins. This is the dotted black line in the chart.</div>
+          <div class="ftip-vars">
+            <div class="ftip-var"><span class="ftip-sym">MP(n)</span><span class="ftip-def">Minimum monthly price per client to achieve break-even plus target margin</span></div>
+            <div class="ftip-var"><span class="ftip-sym">TC(n)</span><span class="ftip-def">Total cost per client at n clients — the sum of development and infrastructure components</span></div>
+            <div class="ftip-var"><span class="ftip-sym">n</span><span class="ftip-def">Current number of clients — as this grows, per-client cost falls</span></div>
+            <div class="ftip-var"><span class="ftip-sym hl2">m</span><span class="ftip-def">Target profit margin per client — added on top of cost recovery to ensure profitability (e.g. 15% margin)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="formula-card" onclick="toggleTip(this)">
+        <span class="info-btn">i</span>
+        <div class="f-label">Cloud Cost Efficiency Ratio</div>
+        <div class="f-eq">CCER = <span class="hl">Revenue</span> ÷ Total Cloud Spend</div>
+        <div class="ftip">
+          <div class="ftip-title">Cloud Cost Efficiency Ratio (CCER)</div>
+          <div class="ftip-desc">A FinOps north-star KPI that measures how much revenue is generated for every euro spent on cloud infrastructure. A CCER of 4.5 means €4.50 in revenue for every €1 of cloud spend. Tracking CCER over time reveals whether cost optimization initiatives are improving business performance — not just reducing spend.</div>
+          <div class="ftip-vars">
+            <div class="ftip-var"><span class="ftip-sym">CCER</span><span class="ftip-def">Cloud Cost Efficiency Ratio — the primary FinOps ROI metric for service providers</span></div>
+            <div class="ftip-var"><span class="ftip-sym hl2">Revenue</span><span class="ftip-def">Total recurring revenue from all active clients in the measurement period</span></div>
+            <div class="ftip-var"><span class="ftip-sym">Total Cloud Spend</span><span class="ftip-def">All cloud-related costs: compute, storage, networking, managed services, licences, and support</span></div>
+            <div class="ftip-var"><span class="ftip-sym">Target</span><span class="ftip-def">A CCER &gt; 3.0 is generally considered healthy for cloud-native SaaS. Below 1.0 means the business is unprofitable from a cloud economics standpoint</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER WITH ACADEMIC REFERENCES -->
+  <div class="fig-footer">
+    <div class="fig-footer-top">
+      <span class="fig-source">
+        <strong>Source:</strong> Conceptual model derived from cloud economics literature and empirical FinOps practice.
+        Mathematical formulations (power-law cost scaling, break-even analysis) adapted from foundational cloud economics research [1][2].
+        FinOps framework principles follow the FinOps Foundation standard [3][4]. CUD discount modelling based on Google Cloud documentation [7] and comparative cloud pricing research [8].
+        All parameter values are illustrative and for research purposes only.
+      </span>
+      <span class="fig-note">
+        <a class="fig-note-link" href="https://www.linkedin.com/in/duksh/" target="_blank" rel="noopener noreferrer" aria-label="DK Koonjoobeeharry on LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.58c0-1.33-.03-3.03-1.85-3.03-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.26 2.37 4.26 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .78 0 1.74v20.52C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.74V1.74C24 .78 23.2 0 22.22 0z"/></svg>
+          <span>DK Koonjoobeeharry · DBA Research · Open University of Mauritius</span>
+        </a>
+      </span>
+    </div>
+
+    <div class="fig-refs">
+      <div class="fig-refs-title">Academic &amp; Primary References</div>
+      <div class="fig-refs-grid">
+
+        <div class="fig-ref-item">
+          <span class="fig-ref-num">[1]</span>
+          <span class="fig-ref-text">
+            <span class="ref-tag econ">ECON</span>
+            Harms, R. &amp; Yamartino, M. (2010). <em>The Economics of the Cloud</em>. Microsoft Corp. White Paper.
+            Establishes the three economies of scale in cloud: data centre size, demand pooling, and multi-tenancy — foundational basis for the infrastructure cost curves.
+            <br><a href="https://news.microsoft.com/download/archived/presskits/cloud/docs/The-Economics-of-the-Cloud.pdf" target="_blank">↗ microsoft.com/Economics-of-the-Cloud.pdf</a>
+          </span>
+        </div>
+
+        <div class="fig-ref-item">
+          <span class="fig-ref-num">[2]</span>
+          <span class="fig-ref-text">
+            <span class="ref-tag econ">ECON</span>
+            Bayrak, E., Conley, J.P. &amp; Wilkie, S. (2011). The Economics of Cloud Computing.
+            <em>Korean Economic Review</em>, 27(2), 203–230.
+            Peer-reviewed survey of cloud cost structure and fixed vs. variable cost modelling — supports the power-law DC(n) and IC(n) formulations.
+            <br><a href="https://irbe.library.vanderbilt.edu/server/api/core/bitstreams/26dba360-5fee-457a-aef2-7706b4f0505a/content" target="_blank">↗ Vanderbilt University · Working Paper 11-W18</a>
+          </span>
+        </div>
+
+        <div class="fig-ref-item">
+          <span class="fig-ref-num">[3]</span>
+          <span class="fig-ref-text">
+            <span class="ref-tag finops">FINOPS</span>
+            Bryant, J. (2022). Driving into the Cloud: What is FinOps?
+            <em>ITNOW</em>, 64(3), 54–55. Oxford University Press.
+            Peer-reviewed definition and lifecycle model of FinOps as a cloud financial management discipline — basis for the CCER and Min Price metrics.
+            <br><a href="https://doi.org/10.1093/combul/bwac097" target="_blank">↗ doi.org/10.1093/combul/bwac097</a>
+          </span>
+        </div>
+
+        <div class="fig-ref-item">
+          <span class="fig-ref-num">[4]</span>
+          <span class="fig-ref-text">
+            <span class="ref-tag finops">FINOPS</span>
+            Nawrocki, P. &amp; Smendowski, M. (2024). FinOps-driven optimization of cloud resource usage for HPC using machine learning.
+            <em>Journal of Computational Science</em>, 78, 102269. ScienceDirect.
+            Academic study applying FinOps cost forecasting and resource reservation planning — validates the CUD optimisation model.
+            <br><a href="https://www.sciencedirect.com/science/article/abs/pii/S1877750324000851" target="_blank">↗ sciencedirect.com · doi.org/10.1016/j.jocs.2024.102269</a>
+          </span>
+        </div>
+
+        <div class="fig-ref-item">
+          <span class="fig-ref-num">[5]</span>
+          <span class="fig-ref-text">
+            <span class="ref-tag econ">ECON</span>
+            Bourreau, M., de Streel, A. &amp; Graef, I. (2024). <em>The Economics of the Cloud</em>. TSE Working Paper No. 1520.
+            Toulouse School of Economics / Microsoft Commission. Comprehensive economic analysis of cloud pricing, committed-spend discounts, and egress fees.
+            <br><a href="https://www.tse-fr.eu/sites/default/files/TSE/documents/doc/wp/2024/wp_tse_1520.pdf" target="_blank">↗ tse-fr.eu · WP-TSE-1520</a>
+          </span>
+        </div>
+
+        <div class="fig-ref-item">
+          <span class="fig-ref-num">[6]</span>
+          <span class="fig-ref-text">
+            <span class="ref-tag finops">FINOPS</span>
+            FinOps Foundation. (2024). <em>State of FinOps Report</em>. Annual practitioner survey (700+ respondents).
+            Industry benchmark for cloud cost efficiency metrics, CCER thresholds, and FinOps maturity adoption rates cited in this model.
+            <br><a href="https://data.finops.org/" target="_blank">↗ data.finops.org</a>
+          </span>
+        </div>
+
+        <div class="fig-ref-item">
+          <span class="fig-ref-num">[7]</span>
+          <span class="fig-ref-text">
+            <span class="ref-tag cloud">CLOUD</span>
+            Google Cloud. (2024). <em>Resource-based Committed Use Discounts</em>. Google Cloud Compute Engine Documentation.
+            Primary source for CUD discount rates (up to 57% for 3-year, 37% for 1-year commitments) used to parameterise the γ discount factor.
+            <br><a href="https://cloud.google.com/compute/docs/instances/signing-up-committed-use-discounts" target="_blank">↗ cloud.google.com/compute/docs/committed-use-discounts</a>
+          </span>
+        </div>
+
+        <div class="fig-ref-item">
+          <span class="fig-ref-num">[8]</span>
+          <span class="fig-ref-text">
+            <span class="ref-tag cloud">CLOUD</span>
+            GSA / ITVMO. (2023). <em>Cloud Optimization Through Discounts and Consolidated Billing</em>. U.S. General Services Administration.
+            Government-published comparative analysis of AWS Savings Plans, Azure Reservations, and GCP CUDs — supports the cross-cloud CUD benchmarking in this model.
+            <br><a href="https://itvmo.gsa.gov/assets/files/FinOps-Optimization-Through-Discounts.pdf" target="_blank">↗ itvmo.gsa.gov · FinOps-Optimization-Through-Discounts.pdf</a>
+          </span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div><!-- /.paper -->
+
+<script>
+// ─── STATE ──────────────────────────────────────────────────────
+const hidden = new Set();
+let paths = {}, hoverDots = {}, currentPts = [], currentScales = {};
+
+// ─── TOGGLE ─────────────────────────────────────────────────────
+function toggle(id) {
+  const btn = document.getElementById(`btn-${id}`);
+  if (hidden.has(id)) {
+    hidden.delete(id);
+    if (paths[id]) paths[id].attr('opacity', 0.92);
+    btn.classList.remove('off');
+  } else {
+    hidden.add(id);
+    if (paths[id]) paths[id].attr('opacity', 0);
+    btn.classList.add('off');
+  }
+}
+
+// ─── MODEL PARAMS (live, updated by calculator) ──────────────────
+let MODEL = { K:50000, a:0.45, c:0.8, b:1.28, g:0.68, ARPU:30, m:0.15, nMax:1000 };
+
+// ─── DATA MODEL ─────────────────────────────────────────────────
+function buildData() {
+  const { K, a, c, b, g, ARPU, m, nMax } = MODEL;
+  const N = 300;
+  return d3.range(N + 1).map(i => {
+    const n       = Math.max(1, (i / N) * nMax);
+    const dev      = K * Math.pow(n, -a);
+    const infraRaw = c * Math.pow(n, b);
+    const infraCud = g * c * Math.pow(n, b * 0.96);
+    const total    = dev + infraRaw;
+    const revenue  = ARPU;
+    const profit   = revenue - total;
+    const priceMin = total * (1 + m);
+    return { n, dev, infraRaw, infraCud, total, revenue, profit, priceMin };
+  });
+}
+
+// ─── FORMAT ─────────────────────────────────────────────────────
+function fmt(v) {
+  if (!isFinite(v)) return '—';
+  const abs = Math.abs(v);
+  const str = abs >= 1000 ? `€${(abs/1000).toFixed(1)}K` : `€${abs.toFixed(0)}`;
+  return v < 0 ? `−${str}` : str;
+}
+
+// ─── ZONE DATA ──────────────────────────────────────────────────
+function zoneFor(n, beN, ssEnd) {
+  if (n < beN) return {
+    name: 'Zone I · Loss Zone', color: '#d55e00',
+    desc: 'Revenue cannot cover total cost. Below minimum viable scale. Pricing must increase or costs must be reduced.',
+    insight: 'Increase client acquisition or reduce fixed costs. Minimum viable price is above current ARPU.'
+  };
+  if (n < ssEnd) return {
+    name: 'Zone III · ROI Sweet Spot', color: '#009e73',
+    desc: 'Economies of scale reducing dev cost per client. Infrastructure scaling is still manageable.',
+    insight: 'Optimal zone for FinOps governance. Lock in CUDs now to extend this zone further right.'
+  };
+  return {
+    name: 'Zone IV · Margin Compression', color: '#0072b2',
+    desc: 'Infra cost growth is outpacing revenue gains. Trigger point for architectural review.',
+    insight: 'Action required: Renegotiate CUDs, implement right-sizing, or revise pricing model.'
+  };
+}
+
+// ─── DRAW ────────────────────────────────────────────────────────
+function draw() {
+  const container = document.getElementById('chart-container');
+  const { nMax } = MODEL;
+  const W = container.clientWidth;
+  const H = Math.round(Math.min(Math.max(W * (9/16), 320), 560));
+
+  const M = {
+    top:    28,
+    right:  Math.max(90, W * 0.11),
+    bottom: 50,
+    left:   Math.max(54, W * 0.075)
+  };
+  const iW = W - M.left - M.right;
+  const iH = H - M.top - M.bottom;
+
+  // Clear
+  d3.select('#chart').selectAll('*').remove();
+  const svg = d3.select('#chart').attr('width', W).attr('height', H);
+  const g   = svg.append('g').attr('transform', `translate(${M.left},${M.top})`);
+
+  const pts  = buildData();
+  currentPts = pts;
+
+  // Inflection points
+  const be = pts.find(d => d.revenue >= d.total) || null;
+  const beN = be ? be.n : Number.POSITIVE_INFINITY;
+  const ssEnd = (() => {
+    if (!be) return nMax;
+    const minTotalPt = pts.reduce((minD, d) => d.total < minD.total ? d : minD, pts[0]);
+    const lowerBound = beN + (nMax * 0.06);
+    const candidate = Math.max(minTotalPt.n, lowerBound);
+    return Math.min(nMax, candidate > beN ? candidate : beN + Math.max(120, nMax * 0.35));
+  })();
+
+  // Scales
+  const xSc = d3.scaleLinear().domain([0, nMax]).range([0, iW]);
+  const yMax = d3.max(pts, d => Math.max(d.total, d.revenue)) * 1.08;
+  const yMin = d3.min(pts, d => d.profit) * 1.1;
+  const ySc  = d3.scaleLinear().domain([yMin, yMax]).range([iH, 0]);
+  currentScales = { xSc, ySc, beN: isFinite(beN) ? beN : null, ssEnd };
+
+  // Defs
+  const defs = svg.append('defs');
+  const mkArrow = (id, color) => {
+    const m = defs.append('marker')
+      .attr('id', id).attr('markerWidth', 6).attr('markerHeight', 6)
+      .attr('refX', 3).attr('refY', 3).attr('orient', 'auto');
+    m.append('path').attr('d', 'M0,0 L6,3 L0,6 Z').attr('fill', color);
+  };
+  mkArrow('arrowCudUp', '#009e73');
+  mkArrow('arrowCudDn', '#009e73');
+
+  // Zone backgrounds
+  const beX = be ? xSc(beN) : iW;
+  const ssX = xSc(ssEnd);
+  g.append('rect').attr('x', xSc(0)).attr('y', 0)
+    .attr('width', beX).attr('height', iH)
+    .attr('fill', 'rgba(213,94,0,0.05)');
+  if (be) {
+    g.append('rect').attr('x', beX).attr('y', 0)
+      .attr('width', Math.max(0, ssX - beX)).attr('height', iH)
+      .attr('fill', 'rgba(0,158,115,0.07)');
+    g.append('rect').attr('x', ssX).attr('y', 0)
+      .attr('width', Math.max(0, iW - ssX)).attr('height', iH)
+      .attr('fill', 'rgba(0,114,178,0.05)');
+  }
+
+  // Zone dividers
+  [be ? beN : null, be ? ssEnd : null].filter(nx => nx !== null && nx <= nMax).forEach(nx => {
+    g.append('line')
+      .attr('x1', xSc(nx)).attr('x2', xSc(nx))
+      .attr('y1', 0).attr('y2', iH)
+      .attr('stroke', '#ccc').attr('stroke-width', 1)
+      .attr('stroke-dasharray', '4,3');
+  });
+
+  // Zone top labels
+  const zLabelY = -10;
+  const zoneLabels = be
+    ? [
+        { cx: (0 + beN) / 2,      text: 'I · LOSS',         color: '#d55e00' },
+        { cx: (beN + ssEnd) / 2,  text: 'III · SWEET SPOT', color: '#009e73' },
+        { cx: (ssEnd + nMax) / 2, text: 'IV · COMPRESSION', color: '#0072b2' },
+      ]
+    : [
+        { cx: nMax / 2, text: 'I · LOSS', color: '#d55e00' },
+      ];
+  zoneLabels.forEach(l => {
+    const lx = xSc(l.cx);
+    if (lx < 0 || lx > iW) return;
+    g.append('text')
+      .attr('x', lx).attr('y', zLabelY)
+      .attr('text-anchor', 'middle')
+      .attr('fill', l.color).attr('font-size', Math.max(8, W * 0.009))
+      .attr('font-family', 'JetBrains Mono').attr('letter-spacing', '0.1em')
+      .text(l.text);
+  });
+
+  // Grid
+  g.append('g').call(
+    d3.axisLeft(ySc).ticks(6).tickSize(-iW).tickFormat('')
+  ).call(ag => {
+    ag.select('.domain').remove();
+    ag.selectAll('.tick line').attr('stroke','#e8e4df').attr('stroke-dasharray','3,3');
+  });
+
+  // Zero line
+  g.append('line')
+    .attr('x1', 0).attr('x2', iW)
+    .attr('y1', ySc(0)).attr('y2', ySc(0))
+    .attr('stroke', '#bbb').attr('stroke-width', 1);
+  g.append('text')
+    .attr('x', -5).attr('y', ySc(0) + 4)
+    .attr('text-anchor', 'end').attr('fill', '#999')
+    .attr('font-size', Math.max(8, W * 0.009))
+    .attr('font-family', 'JetBrains Mono').text('€0');
+
+  // Curves
+  const curveDefs = [
+    { id: 'dev',       key: 'dev',      color: '#d55e00', dash: null,  w: 2.5, label: 'Dev Cost/Client' },
+    { id: 'infra-raw', key: 'infraRaw', color: '#009e73', dash: null,  w: 2.5, label: 'Infra (On-Demand)' },
+    { id: 'infra-cud', key: 'infraCud', color: '#009e73', dash: '7,4', w: 2,   label: 'Infra (CUDs)' },
+    { id: 'total',     key: 'total',    color: '#444444', dash: null,  w: 2.2, label: 'Total Cost/Client' },
+    { id: 'revenue',   key: 'revenue',  color: '#0072b2', dash: null,  w: 2.5, label: 'Revenue' },
+    { id: 'profit',    key: 'profit',   color: '#7b2d8b', dash: '6,3', w: 2,   label: 'Profit / ROI' },
+    { id: 'price-min', key: 'priceMin', color: '#555555', dash: '3,4', w: 1.5, label: 'Min Price/Client' },
+  ];
+
+  const lineGen = key => d3.line()
+    .defined(d => isFinite(d[key]))
+    .x(d => xSc(d.n))
+    .y(d => ySc(d[key]))
+    .curve(d3.curveCatmullRom.alpha(0.5));
+
+  paths = {};
+  curveDefs.forEach(c => {
+    paths[c.id] = g.append('path')
+      .datum(pts)
+      .attr('fill', 'none')
+      .attr('stroke', c.color)
+      .attr('stroke-width', c.w)
+      .attr('stroke-dasharray', c.dash || null)
+      .attr('opacity', hidden.has(c.id) ? 0 : 0.92)
+      .attr('d', lineGen(c.key));
+  });
+
+  // End-of-line labels
+  const labelFontSize = Math.max(8.5, W * 0.011);
+  const usedYs = [];
+  curveDefs.forEach(c => {
+    const last = pts[pts.length - 1];
+    const yv   = last[c.key];
+    if (!isFinite(yv)) return;
+    let cy = ySc(yv);
+    // nudge overlapping labels
+    let tries = 0;
+    while (usedYs.some(uy => Math.abs(uy - cy) < labelFontSize + 3) && tries < 20) {
+      cy += (cy < iH / 2 ? -1 : 1) * (labelFontSize + 2);
+      tries++;
+    }
+    if (cy < -6 || cy > iH + 6) return;
+    usedYs.push(cy);
+    g.append('text')
+      .attr('x', iW + 5).attr('y', cy + 4)
+      .attr('fill', c.color)
+      .attr('font-size', labelFontSize)
+      .attr('font-weight', '500')
+      .attr('font-family', 'Inter')
+      .attr('opacity', hidden.has(c.id) ? 0.3 : 1)
+      .text(c.label);
+  });
+
+  // Break-even annotation
+  if (be) {
+    const beXp = xSc(beN);
+    const beYp = ySc(be.revenue);
+    g.append('circle')
+      .attr('cx', beXp).attr('cy', beYp).attr('r', 6)
+      .attr('fill','white').attr('stroke','#cc79a7').attr('stroke-width', 2.2);
+    const beCalloutX = Math.max(4, beXp - 72);
+    const beCallout  = g.append('g').attr('transform', `translate(${beCalloutX},${Math.max(4, beYp - 44)})`);
+    beCallout.append('rect')
+      .attr('rx', 5).attr('width', 70).attr('height', 20)
+      .attr('fill', 'white').attr('stroke', '#cc79a7').attr('stroke-width', 1.5);
+    beCallout.append('text')
+      .attr('x', 35).attr('y', 14).attr('text-anchor', 'middle')
+      .attr('fill', '#cc79a7').attr('font-size', 9)
+      .attr('font-family', 'JetBrains Mono').attr('font-weight', '500')
+      .text('BREAK-EVEN');
+    g.append('line')
+      .attr('x1', beCalloutX + 35).attr('y1', Math.max(4, beYp - 44) + 20)
+      .attr('x2', beXp).attr('y2', beYp - 7)
+      .attr('stroke', '#cc79a7').attr('stroke-width', 1).attr('stroke-dasharray', '3,2');
+  }
+
+  // CUD savings bracket
+  const cudN  = Math.max(20, nMax * 0.62);
+  const cudPt = pts.find(d => d.n >= cudN) || pts[Math.floor(pts.length * 0.6)];
+  const y1 = ySc(cudPt.infraRaw), y2 = ySc(cudPt.infraCud);
+  const cx = xSc(cudPt.n);
+  if (Math.abs(y1 - y2) > 14) {
+    g.append('line')
+      .attr('x1', cx + 12).attr('x2', cx + 12)
+      .attr('y1', y2 + 2).attr('y2', y1 - 2)
+      .attr('stroke', '#009e73').attr('stroke-width', 1.5)
+      .attr('marker-end', 'url(#arrowCudUp)');
+    g.append('text')
+      .attr('x', cx + 16).attr('y', (y1 + y2) / 2 + 4)
+      .attr('fill', '#009e73').attr('font-size', Math.max(8, W * 0.009))
+      .attr('font-family', 'JetBrains Mono').text('CUD savings');
+  }
+
+  // Axes
+  const tickFontSize = Math.max(9, W * 0.011);
+  g.append('g').attr('transform', `translate(0,${iH})`)
+    .call(d3.axisBottom(xSc).ticks(Math.max(4, Math.floor(iW / 90)))
+      .tickFormat(d => d >= 1000 ? `${d/1000}K` : d))
+    .call(a => a.select('.domain').attr('stroke','#ccc'))
+    .call(a => a.selectAll('text').attr('fill','#888').attr('font-size', tickFontSize));
+
+  g.append('g')
+    .call(d3.axisLeft(ySc).ticks(6)
+      .tickFormat(d => Math.abs(d) >= 1000 ? `€${(d/1000).toFixed(0)}K` : `€${d.toFixed(0)}`))
+    .call(a => a.select('.domain').attr('stroke','#ccc'))
+    .call(a => a.selectAll('text').attr('fill','#888').attr('font-size', tickFontSize));
+
+  const axisLabelSize = Math.max(9.5, W * 0.012);
+  svg.append('text')
+    .attr('x', M.left + iW / 2).attr('y', H - 8)
+    .attr('text-anchor', 'middle').attr('fill', '#888')
+    .attr('font-size', axisLabelSize).attr('font-family', 'JetBrains Mono')
+    .text('Number of Clients (n)');
+  svg.append('text')
+    .attr('transform', 'rotate(-90)')
+    .attr('x', -(M.top + iH / 2)).attr('y', 14)
+    .attr('text-anchor', 'middle').attr('fill', '#888')
+    .attr('font-size', axisLabelSize).attr('font-family', 'JetBrains Mono')
+    .text('Cost / Revenue (€ per client)');
+
+  // Hover dots
+  hoverDots = {};
+  curveDefs.forEach(c => {
+    hoverDots[c.id] = g.append('circle')
+      .attr('r', 4.5).attr('fill', c.color)
+      .attr('stroke','white').attr('stroke-width', 1.5).attr('opacity', 0);
+  });
+
+  // Vertical cursor line
+  const vLine = g.append('line')
+    .attr('y1', 0).attr('y2', iH)
+    .attr('stroke', '#999').attr('stroke-width', 1)
+    .attr('stroke-dasharray', '4,3').attr('opacity', 0);
+
+  // Bisector
+  const bisect = d3.bisector(d => d.n).left;
+
+  svg.append('rect')
+    .attr('x', M.left).attr('y', M.top)
+    .attr('width', iW).attr('height', iH)
+    .attr('fill', 'transparent')
+    .on('mousemove touchmove', function(event) {
+      event.preventDefault();
+      const coords = event.touches ? d3.pointer(event.touches[0], this) : d3.pointer(event, this);
+      const xVal = xSc.invert(coords[0] - M.left);
+      const idx  = Math.min(Math.max(bisect(pts, xVal), 0), pts.length - 1);
+      const d    = pts[idx];
+
+      vLine.attr('x1', xSc(d.n)).attr('x2', xSc(d.n)).attr('opacity', 0.7);
+
+      curveDefs.forEach(c => {
+        const yv = d[c.key];
+        const cy = ySc(yv);
+        if (isFinite(yv) && cy >= -10 && cy <= iH + 10) {
+          hoverDots[c.id].attr('cx', xSc(d.n)).attr('cy', cy).attr('opacity', 1);
+        } else {
+          hoverDots[c.id].attr('opacity', 0);
+        }
+      });
+
+      // Side panel
+      document.getElementById('sp-n').textContent = `${Math.round(d.n).toLocaleString()} clients`;
+      document.getElementById('sp-dev').textContent       = fmt(d.dev);
+      document.getElementById('sp-infra-raw').textContent = fmt(d.infraRaw);
+      document.getElementById('sp-infra-cud').textContent = fmt(d.infraCud);
+      document.getElementById('sp-total').textContent     = fmt(d.total);
+      document.getElementById('sp-revenue').textContent   = fmt(d.revenue);
+
+      const profEl = document.getElementById('sp-profit');
+      profEl.textContent  = (d.profit >= 0 ? '+' : '') + fmt(d.profit);
+      profEl.className    = 'readout-val ' + (d.profit >= 0 ? 'positive' : 'negative');
+      document.getElementById('sp-price-min').textContent = fmt(d.priceMin) + '/client';
+
+      const zone = zoneFor(d.n, beN, ssEnd);
+      const badge = document.getElementById('sp-zone-badge');
+      badge.textContent   = zone.name;
+      badge.style.background  = zone.color + '18';
+      badge.style.color       = zone.color;
+      badge.style.borderColor = zone.color + '44';
+      document.getElementById('sp-zone-desc').textContent = zone.desc;
+      document.getElementById('sp-insight').textContent   = zone.insight;
+    })
+    .on('mouseleave touchend', () => {
+      vLine.attr('opacity', 0);
+      Object.values(hoverDots).forEach(dot => dot.attr('opacity', 0));
+    });
+}
+
+// ─── RESPONSIVE REDRAW ───────────────────────────────────────────
+let resizeTimer;
+const chartResizeObserver = new ResizeObserver(() => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(draw, 80);
+});
+const chartContainerEl = document.getElementById('chart-container');
+if (chartContainerEl) chartResizeObserver.observe(chartContainerEl);
+
+// Initial draw
+draw();
+
+// ─── CALCULATOR LOGIC ────────────────────────────────────────────
+
+// Default MODEL values for reset
+const MODEL_DEFAULTS = { K:50000, a:0.45, c:0.8, b:1.28, g:0.68, ARPU:30, m:0.15, nMax:1000 };
+
+// Track what the user has explicitly provided
+const USER_PROVIDED = { nRef:false, devPerClient:false, infraTotal:false, ARPU:false, cudPct:false, margin:false, nMax:false };
+
+// Smart default n when user hasn't told us their scale yet
+const DEFAULT_N_REF = 100;
+const selectedProviders = new Set();
+let lastInputs = {
+  nRef: null, devPerClient: null, infraTotal: null, ARPU: null,
+  cudPct: null, margin: null, nMax: null
+};
+
+const RECOMMENDATIONS = [
+  { icon:'⚠️', title:'You are below break-even', desc:'Current client volume is below the minimum viable threshold; fixed and variable costs are not yet recovered.', action:'Action: Review pricing page and sales funnel conversion. Prioritise moving n above N_min within the next planning cycle.', providers:[], zones:['red'], priority:'high' },
+  { icon:'📉', title:'CCER below 3×', desc:'Cloud Cost Efficiency Ratio is below FinOps benchmark. Revenue generated per euro of cloud spend is under target.', action:'Action: In your billing console, isolate top cost drivers and enforce unit economics guardrails per service.', providers:[], zones:['red','yellow'], priority:'high' },
+  { icon:'🛑', title:'Contribution margin is negative', desc:'VCPU is equal to or higher than ARPU. Every incremental client currently destroys value.', action:'Action: Increase package price floor or reduce per-client infra usage before scaling customer acquisition.', providers:[], zones:['red'], priority:'high' },
+  { icon:'💳', title:'CUDs/Savings Plans not fully applied', desc:'Discount gap is still material versus committed pricing options. Commitment strategy is likely under-utilised.', action:'Action: Review 12-month steady-state usage and map eligible workloads to commitment instruments.', providers:[], zones:['green','yellow','red'], priority:'medium' },
+  { icon:'🏷️', title:'Implement FinOps cost allocation tagging', desc:'Without consistent tags, accountability and optimisation loops remain weak across teams.', action:'Action: Enforce mandatory tags for owner, environment, product, and cost-center in IaC and policy checks.', providers:[], zones:['green'], priority:'low' },
+  { icon:'🔮', title:'Set up 12-month cost forecasting', desc:'Proactive forecasting improves commitment timing, budget confidence, and board-level planning.', action:'Action: Build monthly forecast scenarios (base/growth/stress) and review variance at each month close.', providers:[], zones:['green'], priority:'low' },
+  { icon:'🧾', title:'AWS Savings Plans coverage', desc:'Compute Savings Plans can reduce eligible compute spend significantly when baseline usage is stable.', action:'Action: AWS Console → Billing and Cost Management → Savings Plans → Recommendations.', providers:['aws'], zones:['green','yellow','red'], priority:'medium' },
+  { icon:'📏', title:'AWS right-sizing opportunities', desc:'Idle and oversized resources create avoidable waste in EC2, EBS, and managed services.', action:'Action: AWS Cost Explorer → Rightsizing Recommendations; prioritise top monthly impact accounts.', providers:['aws'], zones:['yellow','red'], priority:'medium' },
+  { icon:'⚡', title:'Use Spot for fault-tolerant workloads', desc:'Spot capacity can materially reduce non-critical compute costs for resilient jobs.', action:'Action: EC2 Auto Scaling Groups → Mixed Instances Policy with Spot allocation strategies.', providers:['aws'], zones:['yellow','red'], priority:'medium' },
+  { icon:'🚨', title:'Enable Cost Anomaly Detection', desc:'Unexpected spikes should be detected rapidly to reduce financial blast radius.', action:'Action: AWS Console → Cost Management → Cost Anomaly Detection → Create monitor and alerts.', providers:['aws'], zones:['green','yellow','red'], priority:'high' },
+  { icon:'🗄️', title:'S3 Intelligent-Tiering for cold data', desc:'Automatically shifting infrequently accessed objects reduces storage spend with minimal effort.', action:'Action: S3 Bucket → Management → Lifecycle rules and Intelligent-Tiering transition policy.', providers:['aws'], zones:['green'], priority:'low' },
+  { icon:'📦', title:'Azure Reservations + Hybrid Benefit', desc:'Reserved capacity and license benefits can materially reduce long-running VM/database costs.', action:'Action: Azure Portal → Cost Management + Billing → Reservations → Purchase recommendations.', providers:['azure'], zones:['yellow','red'], priority:'medium' },
+  { icon:'🧠', title:'Azure Advisor cost recommendations', desc:'Advisor identifies right-size, idle shutdown, and architecture-level cost opportunities.', action:'Action: Azure Portal → Advisor → Cost tab; export recommendations into remediation backlog.', providers:['azure'], zones:['yellow','red'], priority:'medium' },
+  { icon:'🚨', title:'Azure budget alerts and controls', desc:'Budget and anomaly alerting strengthens accountability before overruns become systemic.', action:'Action: Azure Portal → Cost Management → Budgets → Create budget with action groups.', providers:['azure'], zones:['green','yellow','red'], priority:'high' },
+  { icon:'🏷️', title:'Azure Spot VMs for non-critical jobs', desc:'Spot VMs reduce compute spend for interruption-tolerant processing.', action:'Action: Azure Portal → Virtual Machines → Spot instance deployment for candidate workloads.', providers:['azure'], zones:['yellow','red'], priority:'medium' },
+  { icon:'📉', title:'GCP Resource-based CUDs', desc:'Resource-based commitments can reduce sustained baseline compute spend on eligible workloads.', action:'Action: Google Cloud Console → Billing → Committed Use Discounts → Purchase commitments.', providers:['gcp'], zones:['green','yellow','red'], priority:'medium' },
+  { icon:'🔍', title:'Verify Sustained Use Discounts', desc:'Check whether workloads are reaching expected utilisation to realise automatic discount benefits.', action:'Action: GCP Billing export → BigQuery; validate sustained usage discount effectiveness by SKU.', providers:['gcp'], zones:['green','yellow'], priority:'low' },
+  { icon:'🧹', title:'Use GCP Recommender for idle resources', desc:'Idle resources continue to consume spend without revenue contribution.', action:'Action: GCP Console → Recommender → Cost recommendations and cleanup actions.', providers:['gcp'], zones:['yellow','red'], priority:'high' },
+  { icon:'📨', title:'Set Billing Budget alerts with Pub/Sub', desc:'Automated budget threshold events help trigger operational response workflows quickly.', action:'Action: GCP Console → Billing → Budgets & alerts → Enable Pub/Sub notifications.', providers:['gcp'], zones:['green','yellow','red'], priority:'high' },
+  { icon:'⚙️', title:'BigQuery query cost controls', desc:'Query cost can drift quickly without governance on scan bytes and query patterns.', action:'Action: BigQuery → Reservations/Quotas + max bytes billed + scheduled query audits.', providers:['gcp'], zones:['yellow','red'], priority:'medium' },
+  { icon:'💼', title:'OCI Universal Credits planning', desc:'Universal Credits can improve commitment flexibility when workloads shift across OCI services.', action:'Action: OCI Console → Billing and Cost Management → Usage and Credit Allocation review.', providers:['oci'], zones:['green','yellow','red'], priority:'medium' },
+  { icon:'🆓', title:'OCI Always Free for dev/test', desc:'Move suitable non-production workloads to Always Free resources where practical.', action:'Action: OCI Console → Compute/Storage provisioning templates mapped to Always Free limits.', providers:['oci'], zones:['green'], priority:'low' },
+  { icon:'🧾', title:'IBM Reserved Virtual Servers', desc:'Long-running workloads should be shifted to reservation models for lower unit costs.', action:'Action: IBM Cloud Console → Billing and Usage → Reservation planning for persistent workloads.', providers:['ibm'], zones:['yellow','red'], priority:'medium' },
+  { icon:'🌱', title:'IBM sustainability + cost co-optimisation', desc:'Joint carbon and cost intelligence can identify high-impact remediation opportunities.', action:'Action: IBM Environmental Intelligence Suite + cost reports for optimisation prioritisation.', providers:['ibm'], zones:['green'], priority:'low' },
+  { icon:'📦', title:'Alibaba subscription billing shift', desc:'Subscription billing can materially reduce compute costs versus pay-as-you-go baselines.', action:'Action: Alibaba Console → Billing → Resource Plans / Subscription migration candidates.', providers:['alibaba'], zones:['yellow','red'], priority:'medium' },
+  { icon:'🧾', title:'Huawei ECS Reservations', desc:'Reservation strategies reduce long-run compute cost where workloads are predictable.', action:'Action: Huawei Cloud Console → Billing Center → Reserved Instances for ECS fleet.', providers:['huawei'], zones:['yellow','red'], priority:'medium' },
+  { icon:'🧭', title:'Adopt unified multi-cloud FinOps platform', desc:'Cross-cloud visibility and unit economics governance require a single cost operating model.', action:'Action: Integrate billing exports into a common platform (CloudHealth/OpenCost/warehouse model).', providers:['multi'], zones:['green','yellow','red'], priority:'high' },
+  { icon:'🌐', title:'Control inter-region / inter-cloud egress', desc:'Network egress charges often become hidden margin erosion drivers in multi-cloud topologies.', action:'Action: Build monthly egress map by service path; redesign data flows to reduce charge-heavy hops.', providers:['multi'], zones:['green','yellow','red'], priority:'medium' }
+];
+
+function priorityWeight(priority) {
+  if (priority === 'high') return 0;
+  if (priority === 'medium') return 1;
+  return 2;
+}
+
+function toggleProvider(provider) {
+  const btn = document.querySelector(`[data-provider="${provider}"]`);
+  if (selectedProviders.has(provider)) {
+    selectedProviders.delete(provider);
+    if (btn) btn.classList.remove('selected');
+  } else {
+    selectedProviders.add(provider);
+    if (btn) btn.classList.add('selected');
+  }
+  updateHealthAndRecommendations(lastInputs);
+}
+
+function updateHealthAndRecommendations(inputs) {
+  const { nRef, infraTotal, ARPU: arpuInp } = inputs || {};
+  const nSample  = (nRef && nRef > 0) ? nRef : DEFAULT_N_REF;
+  const hasInfra = infraTotal !== null && infraTotal !== undefined;
+  const hasARPU  = arpuInp !== null && arpuInp !== undefined && arpuInp > 0;
+
+  const bannerEl = document.getElementById('health-banner');
+  const groupBadgeEl = document.getElementById('health-group-num');
+  const titleEl  = document.getElementById('health-zone-title');
+  const descEl   = document.getElementById('health-zone-desc');
+  const scoreEl  = document.getElementById('health-score-value');
+  const listEl   = document.getElementById('rec-list');
+
+  if (!bannerEl || !titleEl || !descEl || !scoreEl || !listEl) return;
+
+  if (!hasInfra || !hasARPU) {
+    bannerEl.className = 'health-banner awaiting';
+    if (groupBadgeEl) groupBadgeEl.style.background = '#7a7a8c';
+    titleEl.textContent = 'Awaiting Inputs';
+    descEl.textContent = 'Add Total Infra Cost and Revenue / Client (ARPU) to compute health score and recommendations.';
+    scoreEl.textContent = '—';
+    scoreEl.style.color = '#7a7a8c';
+    listEl.innerHTML = '<div class="rec-empty">Recommendations will appear after health scoring data is available.</div>';
+    return;
+  }
+
+  const { K, a, c, b, g, ARPU } = MODEL;
+  const dev      = K * Math.pow(nSample, -a);
+  const infraRaw = c * Math.pow(nSample, b);
+  const infraCud = g * c * Math.pow(nSample, b * 0.96);
+  const total    = dev + infraRaw;
+  const revenue  = ARPU * nSample;
+  const vcpu     = infraRaw / nSample;
+  const contribM = ARPU - vcpu;
+  const ccer     = infraRaw > 0 ? revenue / infraRaw : 0;
+  const cudSaveGapPct = infraRaw > 0 ? ((infraRaw - infraCud) / infraRaw) : 0;
+
+  const pts = buildData();
+  const be = pts.find(d => d.revenue >= d.total);
+  const beN = be ? Math.round(be.n) : null;
+
+  let score = 100;
+  const failed = [];
+
+  if (beN === null) {
+    score -= 35;
+    failed.push('No break-even point exists within the current model range.');
+  } else if (nSample < beN) {
+    score -= 35;
+    failed.push(`Current clients (${Math.round(nSample).toLocaleString()}) are below break-even (${beN.toLocaleString()}).`);
+  }
+  if (ccer < 1) {
+    score -= 30;
+    failed.push(`CCER is ${ccer.toFixed(2)}× (<1×).`);
+  } else if (ccer < 3) {
+    score -= 15;
+    failed.push(`CCER is ${ccer.toFixed(2)}× (below 3× benchmark).`);
+  }
+  if (contribM <= 0) {
+    score -= 20;
+    failed.push(`Contribution margin is negative (${fmtOut(contribM, 2)} / client).`);
+  }
+  if (cudSaveGapPct > 0.15) {
+    score -= 5;
+    failed.push(`Commitment saving gap is ${(cudSaveGapPct * 100).toFixed(1)}% of infra spend.`);
+  }
+
+  score = Math.max(0, Math.min(100, score));
+
+  let zoneKey = 'green';
+  let zoneTitle = '🟢 Green Zone — Healthy Economics';
+  let zoneDesc = failed.length
+    ? failed.join(' ')
+    : 'Unit economics are healthy. Continue optimisation discipline and forecasting cadence.';
+  let zoneColor = '#009e73';
+
+  if (score < 40) {
+    zoneKey = 'red';
+    zoneTitle = '🔴 Red Zone — Critical Action Needed';
+    zoneColor = '#d55e00';
+  } else if (score < 70) {
+    zoneKey = 'yellow';
+    zoneTitle = '🟡 Yellow Zone — Needs Improvement';
+    zoneColor = '#b07800';
+  }
+
+  bannerEl.className = `health-banner ${zoneKey}`;
+  if (groupBadgeEl) groupBadgeEl.style.background = zoneColor;
+  titleEl.textContent = zoneTitle;
+  descEl.textContent = zoneDesc;
+  scoreEl.textContent = String(Math.round(score));
+  scoreEl.style.color = zoneColor;
+
+  const providers = Array.from(selectedProviders);
+  const filtered = RECOMMENDATIONS
+    .filter(rec => rec.zones.includes(zoneKey))
+    .filter(rec => rec.providers.length === 0 || providers.some(p => rec.providers.includes(p)))
+    .sort((a, b) => priorityWeight(a.priority) - priorityWeight(b.priority));
+
+  if (!filtered.length) {
+    listEl.innerHTML = '<div class="rec-empty">No provider-specific recommendations match yet. Select one or more providers in Group D to refine actions.</div>';
+    return;
+  }
+
+  listEl.innerHTML = filtered.map(rec => {
+    const providerTag = rec.providers.length ? rec.providers.join('/').toUpperCase() : 'UNIVERSAL';
+    const priorityTag = rec.priority.toUpperCase();
+    return `
+      <article class="rec-card ${rec.priority}">
+        <div class="rec-head">
+          <span class="rec-icon">${rec.icon}</span>
+          <span class="rec-title">${rec.title}</span>
+          <span class="rec-tag">${providerTag}</span>
+          <span class="rec-tag priority-${rec.priority}">${priorityTag}</span>
+        </div>
+        <p class="rec-desc">${rec.desc}</p>
+        <p class="rec-action">→ ${rec.action}</p>
+      </article>
+    `;
+  }).join('');
+}
+
+function getInp(id) {
+  const v = parseFloat(document.getElementById(id).value);
+  return isNaN(v) ? null : v;
+}
+
+function fmtOut(v, decimals=0) {
+  if (!isFinite(v) || v === null) return null;
+  const abs = Math.abs(v);
+  const str = abs >= 1000 ? `€${(abs/1000).toFixed(1)}K` : `€${abs.toFixed(decimals)}`;
+  return v < 0 ? `−${str}` : str;
+}
+
+// Set output card — val=null means "needs more data", val=string is a result
+function setOut(id, val, cls='', cardState='', missingMsg='') {
+  const el   = document.getElementById(id);
+  const sub  = document.getElementById(id + '-sub');  // optional sub-element
+  if (!el) return;
+
+  const card = el.closest('.calc-out-card');
+  card.classList.remove('live','live-warn','live-bad','needs-data');
+
+  if (val === null) {
+    // Not enough data — show what's needed
+    el.textContent = '—';
+    el.className   = 'calc-out-val muted';
+    card.classList.add('needs-data');
+    // Write the missing message into the sub-line
+    const subEl = card.querySelector('.calc-out-sub');
+    if (subEl && missingMsg) subEl.textContent = '⚠ Needs: ' + missingMsg;
+  } else {
+    el.textContent = val;
+    el.className   = 'calc-out-val' + (cls ? ' ' + cls : '');
+    // Restore default sub text
+    const subEl = card.querySelector('.calc-out-sub');
+    if (subEl) subEl.textContent = card.dataset.defaultSub || subEl.dataset.orig || subEl.textContent;
+    if (cardState === 'bad')       card.classList.add('live-bad');
+    else if (cardState === 'warn') card.classList.add('live-warn');
+    else                           card.classList.add('live');
+  }
+}
+
+// Store original sub texts on first run
+function cacheSubTexts() {
+  document.querySelectorAll('.calc-out-card').forEach(card => {
+    const subEl = card.querySelector('.calc-out-sub');
+    if (subEl && !subEl.dataset.orig) subEl.dataset.orig = subEl.textContent;
+  });
+}
+
+function onInput(fieldId) {
+  const input = document.getElementById('inp-' + fieldId);
+  if (input) {
+    const filled = input.value.trim() !== '';
+    input.closest('.calc-field').classList.toggle('has-value', filled);
+    USER_PROVIDED[fieldId] = filled;
+  }
+  recalculate();
+  updateProgressPills();
+}
+
+function updateProgressPills() {
+  const ids = ['inp-nRef','inp-devPerClient','inp-infraTotal','inp-ARPU','inp-cudPct','inp-margin','inp-nMax'];
+  const prog = document.getElementById('calc-progress');
+  if (prog) prog.style.display = 'flex';
+  let filled = 0;
+  ids.forEach((id, i) => {
+    const el   = document.getElementById(id);
+    const pill = document.getElementById('cp-' + i);
+    const has  = el && el.value.trim() !== '';
+    if (has) filled++;
+    if (pill) pill.classList.toggle('filled', has);
+  });
+  const dot  = document.getElementById('calc-dot');
+  const text = document.getElementById('calc-status-text');
+  if (filled === 0) {
+    dot.classList.remove('active');
+    text.classList.remove('active');
+    text.textContent = 'Enter values above to begin';
+  } else {
+    dot.classList.add('active');
+    text.classList.add('active');
+    text.textContent = `${filled} of ${ids.length} fields filled · chart updated`;
+  }
+}
+
+function recalculate() {
+  cacheSubTexts();
+
+  const nRef         = getInp('inp-nRef');
+  const devPerClient = getInp('inp-devPerClient');
+  const infraTotal   = getInp('inp-infraTotal');
+  const ARPU         = getInp('inp-ARPU');
+  const cudPct       = getInp('inp-cudPct');
+  const marginPct    = getInp('inp-margin');
+  const nMaxInp      = getInp('inp-nMax');
+  lastInputs = { nRef, devPerClient, infraTotal, ARPU, cudPct, margin: marginPct, nMax: nMaxInp };
+
+  let changed = false;
+  let derivations = [];
+
+  // ── Always-applicable fields ──────────────────────────────────
+  if (ARPU !== null && ARPU > 0)        { MODEL.ARPU = ARPU; changed = true; }
+  if (nMaxInp !== null && nMaxInp >= 10) { MODEL.nMax = nMaxInp; changed = true; }
+  if (marginPct !== null)               { MODEL.m = Math.max(0, marginPct / 100); changed = true; }
+  if (cudPct !== null)                  { MODEL.g = Math.max(0.01, 1 - cudPct / 100); changed = true; derivations.push(`γ=${MODEL.g.toFixed(2)}`); }
+
+  // ── Derive K from devPerClient ────────────────────────────────
+  // Use actual nRef if given, otherwise use DEFAULT_N_REF as a calibration assumption
+  if (devPerClient !== null && devPerClient > 0) {
+    const n = (nRef && nRef > 0) ? nRef : DEFAULT_N_REF;
+    MODEL.K = devPerClient * Math.pow(n, MODEL.a);
+    changed = true;
+    derivations.push(`K=${MODEL.K.toFixed(0)}`);
+  }
+
+  // ── Derive c from infraTotal ──────────────────────────────────
+  // KEY FIX: never calibrate against n=1 — use nRef or DEFAULT_N_REF
+  if (infraTotal !== null && infraTotal > 0) {
+    const n = (nRef && nRef > 0) ? nRef : DEFAULT_N_REF;
+    MODEL.c = infraTotal / Math.pow(n, MODEL.b);
+    changed = true;
+    derivations.push(`c=${MODEL.c.toFixed(4)} @ n=${n}`);
+  }
+
+  if (changed) { draw(); }
+  updateOutputCards({ nRef, devPerClient, infraTotal, ARPU, cudPct });
+  updateHealthAndRecommendations(lastInputs);
+
+  const text = document.getElementById('calc-status-text');
+  if (derivations.length && text) {
+    text.textContent = `✓ Derived: ${derivations.join(' · ')} · chart updated`;
+  }
+}
+
+function updateOutputCards(inputs) {
+  const { nRef, devPerClient, infraTotal, ARPU: arpuInp, cudPct } = inputs;
+  const { K, a, c, b, g, ARPU, m, nMax } = MODEL;
+
+  // Use actual nRef if provided, otherwise DEFAULT_N_REF for display calculations
+  const nSample   = (nRef && nRef > 0) ? nRef : DEFAULT_N_REF;
+  const hasARPU   = arpuInp !== null && arpuInp > 0;
+  const hasInfra  = infraTotal !== null;
+  const hasDev    = devPerClient !== null;
+  const hasNRef   = nRef !== null && nRef > 0;
+
+  const dev      = K * Math.pow(nSample, -a);
+  const infraRaw = c * Math.pow(nSample, b);
+  const infraCud = g * c * Math.pow(nSample, b * 0.96);
+  const total    = dev + infraRaw;
+  const revenue  = ARPU * nSample;
+  const vcpu     = infraRaw / nSample;
+  const contribM = ARPU - vcpu;
+  const priceMin = (total / nSample) * (1 + m);
+  const ccer     = infraRaw > 0 ? (revenue / infraRaw) : null;
+  const cudSave  = infraRaw - infraCud;
+
+  // Break-even search
+  const pts = buildData();
+  const be  = pts.find(d => d.revenue >= d.total);
+  const beN = be ? Math.round(be.n) : null;
+
+  // ── BREAK-EVEN ───────────────────────────────────────────────
+  // Needs: at least one cost input (infra OR dev) AND ARPU
+  // Without ARPU there is no revenue line; without any cost there's no cost line
+  const beNeedsArpu  = !hasARPU || ARPU <= 0;
+  const beNeedsCost  = !hasInfra && !hasDev;
+
+  if (beNeedsArpu && beNeedsCost) {
+    setOut('oval-beN', null, '', '', 'Revenue/Client (ARPU) + one cost figure');
+  } else if (beNeedsArpu) {
+    setOut('oval-beN', null, '', '', 'Revenue/Client (ARPU)');
+  } else if (beNeedsCost) {
+    setOut('oval-beN', null, '', '', 'Dev Cost or Infra Cost');
+  } else if (beN && beN <= nMax) {
+    const beClass = beN <= nSample ? 'good' : 'warn';
+    const beCard  = beN <= nSample ? '' : 'warn';
+    const note    = !hasNRef ? ` (est. @ n=${DEFAULT_N_REF})` : '';
+    setOut('oval-beN', `${beN.toLocaleString()} clients${note}`, beClass, beCard);
+  } else {
+    // Break-even exists but beyond chart range — model might be miscalibrated
+    const hint = !hasNRef ? ` · add Client Count for accuracy` : '';
+    setOut('oval-beN', beN === null ? 'Not reachable' : `> ${nMax.toLocaleString()} clients`, 'warn', 'warn');
+    const subEl = document.querySelector('#out-beN .calc-out-sub');
+    if (subEl) subEl.textContent = 'Revenue per client stays below total cost per client across range' + hint;
+  }
+
+  // ── MIN PRICE / CLIENT ────────────────────────────────────────
+  if (!hasInfra && !hasDev) {
+    setOut('oval-minPrice', null, '', '', 'Dev Cost or Infra Cost');
+  } else {
+    const note    = !hasNRef ? ` · est. @ n=${DEFAULT_N_REF}` : '';
+    const mpOk    = ARPU > 0 && priceMin < ARPU;
+    const mpClass = mpOk ? 'good' : 'bad';
+    setOut('oval-minPrice', fmtOut(priceMin, 2) + ' / client', mpClass, mpClass === 'bad' ? 'bad' : '');
+    if (note) {
+      const subEl = document.querySelector('#out-minPrice .calc-out-sub');
+      if (subEl) subEl.textContent = subEl.dataset.orig + note;
+    }
+  }
+
+  // ── VCPU ─────────────────────────────────────────────────────
+  if (!hasInfra) {
+    setOut('oval-vcpu', null, '', '', 'Total Infra Cost');
+  } else {
+    const note  = !hasNRef ? ` · est. @ n=${DEFAULT_N_REF}` : '';
+    setOut('oval-vcpu', fmtOut(vcpu, 2) + ' / client', '');
+    if (note) {
+      const subEl = document.querySelector('#out-vcpu .calc-out-sub');
+      if (subEl) subEl.textContent = subEl.dataset.orig + note;
+    }
+  }
+
+  // ── CONTRIBUTION MARGIN ───────────────────────────────────────
+  if (!hasInfra && !hasARPU) {
+    setOut('oval-margin', null, '', '', 'Total Infra Cost + Revenue / Client (ARPU)');
+  } else if (!hasInfra) {
+    setOut('oval-margin', null, '', '', 'Total Infra Cost');
+  } else if (!hasARPU || ARPU <= 0) {
+    setOut('oval-margin', null, '', '', 'Revenue / Client (ARPU)');
+  } else {
+    const cmClass = contribM > 0 ? 'good' : 'bad';
+    setOut('oval-margin', fmtOut(contribM, 2) + ' / client', cmClass, cmClass === 'bad' ? 'bad' : '');
+  }
+
+  // ── CCER ─────────────────────────────────────────────────────
+  if (!hasInfra && !hasARPU) {
+    setOut('oval-ccer', null, '', '', 'Total Infra Cost + Revenue / Client (ARPU)');
+  } else if (!hasInfra) {
+    setOut('oval-ccer', null, '', '', 'Total Infra Cost');
+  } else if (!hasARPU || ARPU <= 0) {
+    setOut('oval-ccer', null, '', '', 'Revenue / Client (ARPU)');
+  } else if (ccer !== null) {
+    const cc = ccer >= 3 ? 'good' : ccer >= 1 ? 'warn' : 'bad';
+    setOut('oval-ccer', ccer.toFixed(2) + '×', cc, cc);
+  } else {
+    setOut('oval-ccer', null, '', '', 'Valid infra cost > 0');
+  }
+
+  // ── CUD SAVING ────────────────────────────────────────────────
+  if (!hasInfra) {
+    setOut('oval-cudSave', null, '', '', 'Total Infra Cost');
+  } else {
+    const note = !hasNRef ? ` · est. @ n=${DEFAULT_N_REF}` : '';
+    setOut('oval-cudSave', fmtOut(cudSave) + ' / mo', cudSave > 0 ? 'good' : '', cudSave > 0 ? '' : 'warn');
+    if (note) {
+      const subEl = document.querySelector('#out-cudSave .calc-out-sub');
+      if (subEl) subEl.textContent = subEl.dataset.orig + note;
+    }
+  }
+}
+
+function resetModel() {
+  Object.assign(MODEL, MODEL_DEFAULTS);
+  Object.keys(USER_PROVIDED).forEach(k => USER_PROVIDED[k] = false);
+  selectedProviders.clear();
+  document.querySelectorAll('.provider-btn.selected').forEach(btn => btn.classList.remove('selected'));
+  lastInputs = {
+    nRef: null, devPerClient: null, infraTotal: null, ARPU: null,
+    cudPct: null, margin: null, nMax: null
+  };
+  const ids = ['inp-nRef','inp-devPerClient','inp-infraTotal','inp-ARPU','inp-cudPct','inp-margin','inp-nMax'];
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+    const field = el && el.closest('.calc-field');
+    if (field) field.classList.remove('has-value');
+  });
+  for (let i = 0; i < 7; i++) {
+    const p = document.getElementById('cp-' + i);
+    if (p) p.classList.remove('filled');
+  }
+  const prog = document.getElementById('calc-progress');
+  if (prog) prog.style.display = 'none';
+  const dot  = document.getElementById('calc-dot');
+  const text = document.getElementById('calc-status-text');
+  if (dot)  dot.classList.remove('active');
+  if (text) { text.classList.remove('active'); text.textContent = 'Enter values above to begin'; }
+
+  // Restore original sub-texts and clear cards
+  document.querySelectorAll('.calc-out-card').forEach(card => {
+    card.classList.remove('live','live-warn','live-bad','needs-data');
+    const subEl = card.querySelector('.calc-out-sub');
+    if (subEl && subEl.dataset.orig) subEl.textContent = subEl.dataset.orig;
+    const valEl = card.querySelector('.calc-out-val');
+    if (valEl) { valEl.textContent = '—'; valEl.className = 'calc-out-val muted'; }
+  });
+  draw();
+  updateHealthAndRecommendations(lastInputs);
+}
+
+// ─── FORMULA TOOLTIP LOGIC ───────────────────────────────────────
+function toggleTip(card) {
+  const tip    = card.querySelector('.ftip');
+  const isOpen = card.classList.contains('active');
+
+  // Close all open tips first
+  document.querySelectorAll('.formula-card.active').forEach(c => {
+    c.classList.remove('active');
+    c.querySelector('.ftip').classList.remove('open');
+  });
+
+  if (!isOpen) {
+    // Determine if tooltip should flip downward (card in upper half of page)
+    const rect      = card.getBoundingClientRect();
+    const midWindow = window.innerHeight / 2;
+    card.classList.toggle('flip-down', rect.top < midWindow);
+    card.classList.add('active');
+    tip.classList.add('open');
+    tip.style.pointerEvents = 'none'; // keep clicks passing through
+  }
+}
+
+// Close tooltip when clicking outside
+document.addEventListener('click', e => {
+  if (!e.target.closest('.formula-card')) {
+    document.querySelectorAll('.formula-card.active').forEach(c => {
+      c.classList.remove('active');
+      c.querySelector('.ftip').classList.remove('open');
+    });
+  }
+});
+
+// Close tooltip on Escape key
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.formula-card.active').forEach(c => {
+      c.classList.remove('active');
+      c.querySelector('.ftip').classList.remove('open');
+    });
+  }
+});
+
+cacheSubTexts();
+updateHealthAndRecommendations(lastInputs);
+</script>
 </body>
 </html>
