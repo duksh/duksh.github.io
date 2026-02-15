@@ -2431,6 +2431,7 @@ function buildShareStateUrl() {
 
   const url = new URL(window.location.href);
   url.searchParams.set('state', encoded);
+  url.hash = 'group-health';
   return url;
 }
 
@@ -2515,6 +2516,23 @@ function applySharedState(state) {
   return true;
 }
 
+function scrollToHealthSectionFromSharedState() {
+  const healthSection = document.getElementById('group-health');
+  if (!healthSection) return;
+
+  const url = new URL(window.location.href);
+  if (url.hash !== '#group-health') {
+    const replacePath = `${url.pathname}${url.search}#group-health`;
+    window.history.replaceState({}, '', replacePath);
+  }
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      healthSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+}
+
 function loadSharedStateFromUrl() {
   const params = new URLSearchParams(window.location.search);
   const encoded = params.get('state');
@@ -2527,7 +2545,10 @@ function loadSharedStateFromUrl() {
   }
 
   const applied = applySharedState(decoded);
-  if (applied) writeShareFeedback('Shared calculator state loaded.', false);
+  if (applied) {
+    writeShareFeedback('Shared calculator state loaded. Jumped to Health & Recommendations.', false);
+    scrollToHealthSectionFromSharedState();
+  }
   return applied;
 }
 
