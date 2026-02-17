@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FinOps Calculator Product Roadmap 2026</title>
+  <meta name="description" content="Public roadmap summary for the FinOps and cloud economics calculator: quarterly releases and expected product impact.">
+  <style>
+    :root {
+      --bg: #f2f6fc;
+      --card: #ffffff;
+      --ink: #1f2a44;
+      --muted: #4b5f85;
+      --accent: #0c7bdc;
+      --line: #d9e4f6;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: radial-gradient(circle at 15% -10%, #dbeeff 0%, var(--bg) 45%, #edf3ff 100%);
+      color: var(--ink);
+      line-height: 1.55;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 32px 20px 56px;
+    }
+
+    .hero {
+      background: linear-gradient(120deg, #083f78 0%, #0a6fcc 60%, #45a2ef 100%);
+      color: #fff;
+      border-radius: 16px;
+      padding: 26px 24px;
+      box-shadow: 0 14px 28px rgba(8, 63, 120, 0.24);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+    }
+
+    .hero p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.93);
+    }
+
+    .nav {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: #073968;
+      background: rgba(255, 255, 255, 0.92);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .meta {
+      margin: 16px 0 20px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .quarter {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      margin-bottom: 14px;
+      box-shadow: 0 8px 18px rgba(31, 42, 68, 0.06);
+      overflow: hidden;
+    }
+
+    .quarter h2 {
+      margin: 0;
+      font-size: 1.1rem;
+      color: #073968;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(90deg, #edf6ff 0%, #ffffff 100%);
+    }
+
+    .quarter .content {
+      padding: 14px 16px 16px;
+    }
+
+    .quarter p {
+      margin-top: 0;
+      color: var(--muted);
+    }
+
+    .quarter ul {
+      margin: 8px 0 0;
+      padding-left: 18px;
+    }
+
+    .quarter li {
+      margin-bottom: 8px;
+    }
+
+    .impact {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-left: 4px solid var(--accent);
+      background: #f1f8ff;
+      border-radius: 0 10px 10px 0;
+      font-size: 0.95rem;
+      color: #24446f;
+    }
+
+    .footer {
+      margin-top: 24px;
+      font-size: 0.86rem;
+      color: #5e7397;
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding: 22px 16px;
+      }
+
+      .quarter h2 {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section class="hero">
+      <h1>FinOps Calculator Roadmap (2026)</h1>
+      <p>
+        Public summary of quarter-by-quarter feature evolution for the FinOps and Cloud Economics Calculator,
+        expanding toward a converged technology economics decision engine.
+      </p>
+      <div class="nav" aria-label="Roadmap links">
+        <a href="https://duksh.github.io/">Main site</a>
+        <a href="https://duksh.github.io/document.html">Calculator documentation</a>
+        <a href="https://github.com/duksh/finops-calculator">Source repository</a>
+      </div>
+    </section>
+
+    <p class="meta">
+      Execution backlog is managed in GitHub Issues/Project under <strong>duksh/finops-calculator</strong>.
+      This page mirrors the public roadmap summary.
+    </p>
+
+    <article class="quarter">
+      <h2>Q1 - Foundation and Trust</h2>
+      <div class="content">
+        <p>Core model hardening and explainability upgrades.</p>
+        <ul>
+          <li>Unified Input Model v2</li>
+          <li>Assumption Versioning</li>
+          <li>Scenario Compare (Baseline vs Optimized)</li>
+          <li>Formula Trace Panel</li>
+          <li>Input Quality Guardrails</li>
+        </ul>
+        <div class="impact"><strong>Calculator impact:</strong> faster onboarding, fewer invalid runs, and much higher trust in outputs.</div>
+      </div>
+    </article>
+
+    <article class="quarter">
+      <h2>Q2 - ITAM and Portfolio Convergence</h2>
+      <div class="content">
+        <p>Expand from cloud-only modeling to total technology economics.</p>
+        <ul>
+          <li>ITAM Cost Overlay</li>
+          <li>Portfolio View (multi-workload)</li>
+          <li>Forecast Confidence Bands</li>
+          <li>Recommendation Prioritization v2</li>
+        </ul>
+        <div class="impact"><strong>Calculator impact:</strong> more accurate pricing floor/margin outcomes and stronger planning decisions at portfolio level.</div>
+      </div>
+    </article>
+
+    <article class="quarter">
+      <h2>Q3 - Governance Expansion</h2>
+      <div class="content">
+        <p>Add GreenOps and AI economics governance capabilities.</p>
+        <ul>
+          <li>GreenOps Carbon Layer</li>
+          <li>AI Economics Module</li>
+          <li>Policy and Threshold Engine</li>
+          <li>Anomaly and Drift Alerts</li>
+        </ul>
+        <div class="impact"><strong>Calculator impact:</strong> supports sustainability goals, AI workload economics, and policy-based cost control.</div>
+      </div>
+    </article>
+
+    <article class="quarter">
+      <h2>Q4 - Decision Engine and Enterprise Readiness</h2>
+      <div class="content">
+        <p>Operationalize recommendations and track realized value.</p>
+        <ul>
+          <li>Decision Playbooks</li>
+          <li>Value Realization Tracker</li>
+          <li>MCP Workflow Automation</li>
+          <li>Audit and Role-based Views</li>
+        </ul>
+        <div class="impact"><strong>Calculator impact:</strong> transforms the tool into a continuous decision and optimization platform.</div>
+      </div>
+    </article>
+
+    <footer class="footer">
+      Last updated: 16 Feb 2026 (UTC+04:00)
+    </footer>
+  </main>
+</body>
+</html>
