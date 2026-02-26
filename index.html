@@ -1971,6 +1971,20 @@ body.chart-focus-open #chart-section .chart-focus-close {
   border-color: rgba(213,94,0,0.58);
   background: rgba(213,94,0,0.2);
 }
+.calc-action-btn--agent {
+  border-color: rgba(0,158,115,0.38);
+  background: rgba(0,158,115,0.11);
+  color: #006d4d;
+}
+.calc-action-btn--agent:hover {
+  border-color: rgba(0,158,115,0.55);
+  background: rgba(0,158,115,0.18);
+}
+.calc-action-btn--agent:disabled {
+  cursor: not-allowed;
+  opacity: 0.72;
+  transform: none;
+}
 
 .calc-new-badge {
   display: inline-flex;
@@ -2034,12 +2048,112 @@ body.chart-focus-open #chart-section .chart-focus-close {
 .calc-actions-row--controls {
   grid-template-columns: minmax(0, 1fr);
 }
+.calc-actions-row--agent {
+  grid-template-columns: minmax(0, 1fr);
+  background: rgba(0,158,115,0.04);
+}
 .calc-actions-row--scenarios {
   background: rgba(0,114,178,0.03);
 }
 .calc-actions-row--advanced {
   border-bottom: 0;
   padding-bottom: 10px;
+}
+.agent-triage-result {
+  border: 1px solid rgba(0,158,115,0.28);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.92);
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+.agent-triage-result[hidden] {
+  display: none !important;
+}
+.agent-triage-result.is-error {
+  border-color: rgba(181,76,0,0.35);
+  background: rgba(181,76,0,0.06);
+}
+.agent-triage-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: baseline;
+  justify-content: space-between;
+}
+.agent-triage-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #006d4d;
+}
+.agent-triage-meta {
+  font-size: 10px;
+  color: #4f6280;
+  font-family: 'JetBrains Mono', monospace;
+}
+.agent-triage-summary {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #243d56;
+}
+.agent-triage-actions {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+}
+.agent-triage-actions li {
+  font-size: 12px;
+  line-height: 1.45;
+  color: #2d4460;
+}
+.agent-triage-assumptions {
+  margin: 0;
+  font-size: 11px;
+  color: #4b5f78;
+}
+.agent-triage-assumptions ul {
+  margin: 4px 0 0;
+  padding-left: 16px;
+  display: grid;
+  gap: 4px;
+}
+.agent-triage-status {
+  margin: 2px 0 0;
+  font-size: 11px;
+  line-height: 1.35;
+  color: #4f6280;
+  font-family: 'JetBrains Mono', monospace;
+}
+.agent-triage-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.agent-triage-status.is-checking {
+  color: #5a5a8a;
+}
+.agent-triage-status.is-ok {
+  color: #006d4d;
+}
+.agent-triage-status.is-error {
+  color: #8a3d00;
+}
+.agent-triage-retry {
+  flex-shrink: 0;
+  padding: 4px 8px;
+  min-height: 0;
+  font-size: 10px;
+  letter-spacing: 0.02em;
+}
+.agent-triage-retry:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 .calc-scenario-suite {
   display: grid;
@@ -4490,6 +4604,19 @@ body.cfo-focus-open #qbv-dashboard .cfo-focus-close {
   font-size: var(--font-size-2xs);
   line-height: 1.45;
 }
+.rec-severity-helper {
+  margin-top: 6px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  border: 1px dashed rgba(57, 66, 89, 0.28);
+  background: rgba(57, 66, 89, 0.05);
+  color: #4b5263;
+  font-size: var(--font-size-2xs);
+  line-height: 1.45;
+}
+.rec-severity-divider {
+  margin: 4px 0 2px;
+}
 .rec-filters-label {
   font-family: 'JetBrains Mono', monospace;
   font-size: 10px;
@@ -4575,6 +4702,36 @@ body.cfo-focus-open #qbv-dashboard .cfo-focus-close {
 .rec-tag.category-marketing { color: #005a6f; border-color: rgba(0,158,115,0.4); background: rgba(0,158,115,0.12); }
 .rec-tag.category-crm { color: #6f3a9a; border-color: rgba(123,45,139,0.4); background: rgba(123,45,139,0.12); }
 .rec-tag.category-governance { color: #595f73; border-color: rgba(96,103,122,0.45); background: rgba(96,103,122,0.12); }
+.rec-tag.severity-critical { color: #8a3100; border-color: rgba(213,94,0,0.42); background: rgba(213,94,0,0.12); }
+.rec-tag.severity-high { color: #7a5400; border-color: rgba(230,159,0,0.45); background: rgba(230,159,0,0.14); }
+.rec-tag.severity-needs { color: #4f347f; border-color: rgba(106,81,163,0.42); background: rgba(106,81,163,0.12); }
+.rec-tag.severity-low { color: #0a664e; border-color: rgba(0,158,115,0.45); background: rgba(0,158,115,0.11); }
+
+.rec-source-link {
+  appearance: none;
+  align-self: flex-start;
+  border: 1px dashed rgba(57,66,89,0.42);
+  border-radius: 7px;
+  background: rgba(57,66,89,0.04);
+  color: #3f475f;
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.02em;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+.rec-source-link:hover,
+.rec-source-link:focus-visible {
+  border-color: rgba(0,114,178,0.52);
+  background: rgba(0,114,178,0.1);
+  color: #0f4e76;
+  outline: none;
+}
+#calc-kpi-output-grid .calc-out-card.rec-source-target {
+  box-shadow: 0 0 0 3px rgba(0, 114, 178, 0.18);
+  border-color: rgba(0,114,178,0.52);
+}
 
 .rec-desc {
   color: var(--muted);
@@ -4898,7 +5055,7 @@ body.cfo-focus-open #qbv-dashboard .cfo-focus-close {
         <button class="cta-btn" aria-describedby="cta-band-note" onclick="document.getElementById('calculator-section').scrollIntoView({behavior:'smooth', block:'start'})">Get Started — Open FiceCal</button>
         <button class="cta-btn cta-btn-secondary" type="button" data-mcp-open aria-haspopup="dialog" aria-controls="mcp-modal" aria-describedby="cta-band-note">Learn more about FiceCal MCP</button>
       </div>
-      <p class="cta-note" id="cta-band-note">Need agent-ready workflows? The same calculator model is available as MCP tools that assistants can call directly.</p>
+      <p class="cta-note" id="cta-band-note">Need agent-ready workflows? The same calculator model is available as MCP tools, and Agent Hub beta exposes a triage HTTP endpoint for quick action plans.</p>
     </div>
   </section>
 
@@ -4910,12 +5067,13 @@ body.cfo-focus-open #qbv-dashboard .cfo-focus-close {
           <div class="mcp-kicker">FiceCal MCP</div>
           <h2 class="mcp-title" id="mcp-section-title">Use this model from AI assistants, not just from the browser UI.</h2>
           <p class="mcp-subtitle">
-            FiceCal is also available as a Model Context Protocol (MCP) server so teams can request break-even, health, AI token economics, and recommendation outputs programmatically from Cursor, Windsurf, Claude Desktop, and other MCP-capable tools.
+            FiceCal is also available as a Model Context Protocol (MCP) server so teams can request break-even, health, AI token economics, and recommendation outputs programmatically from Cursor, Windsurf, Claude Desktop, and other MCP-capable tools. A Render-hostable Agent Hub beta extends this with a triage workflow endpoint.
           </p>
         </div>
         <div class="mcp-head-actions">
           <button class="mcp-chip-btn" type="button" data-mcp-open aria-haspopup="dialog" aria-controls="mcp-modal">Learn more</button>
           <a class="mcp-chip-link" href="https://github.com/duksh/finops-calculator-mcp" target="_blank" rel="noopener noreferrer">Open MCP Repo ↗</a>
+          <a class="mcp-chip-link" href="https://github.com/duksh/finops-calculator-mcp/tree/main/server/agents" target="_blank" rel="noopener noreferrer">Agent Hub Beta ↗</a>
         </div>
       </div>
 
@@ -4946,6 +5104,7 @@ body.cfo-focus-open #qbv-dashboard .cfo-focus-close {
             <li>Turn pricing and cloud assumptions into quick scenario comparisons.</li>
             <li>Embed FinOps checks in architecture reviews and governance workflows.</li>
             <li>Generate recommendation summaries without re-entering calculator inputs.</li>
+            <li>Run deterministic triage plans from <code>/v1/agent/triage</code> for executive-ready next actions.</li>
           </ul>
         </article>
       </div>
@@ -5176,6 +5335,23 @@ body.cfo-focus-open #qbv-dashboard .cfo-focus-close {
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="1" y="1" width="7" height="7" rx="1"/></svg>
               Copy state link
             </button>
+          </div>
+          <div class="calc-actions-row calc-actions-row--agent">
+            <button
+              class="calc-action-btn calc-action-btn--agent"
+              id="calc-agent-triage-btn"
+              type="button"
+              onclick="runAgentTriage()"
+              aria-label="Run Agent Hub triage using current calculator inputs"
+              title="Calls the configured Agent Hub endpoint and returns top actions. Configure endpoint with ?agentApi=https://<service>.onrender.com or window.FICECAL_AGENT_API_BASE."
+            >
+              Run Agent Triage (Beta)
+            </button>
+            <div class="agent-triage-status-row">
+              <div class="agent-triage-status" id="agent-triage-status" aria-live="polite">Agent endpoint not configured. Add ?agentApi=https://&lt;service&gt;.onrender.com to enable triage.</div>
+              <button type="button" class="calc-inline-link-btn agent-triage-retry" id="agent-triage-retry-btn" onclick="retryAgentTriageStatus()" aria-label="Retry Agent Hub connectivity check">Retry</button>
+            </div>
+            <div class="agent-triage-result" id="agent-triage-result" hidden aria-live="polite"></div>
           </div>
           <div class="calc-actions-row calc-actions-row--advanced">
             <details class="calc-disclosure" id="calc-more-actions">
@@ -6267,6 +6443,7 @@ body.cfo-focus-open #qbv-dashboard .cfo-focus-close {
             <button class="rec-filter-btn" type="button" data-rec-category="governance" aria-pressed="false">Governance</button>
           </div>
           <div class="intent-rec-helper" id="intent-rec-helper">Recommendation emphasis adapts to selected intent while keeping health-score logic unchanged.</div>
+          <div class="rec-severity-helper" id="rec-severity-helper"><strong>Severity order:</strong> Critical → High → Needs data → Low. Recommendation cards mapped from Group C outputs show their source metric.</div>
           <div class="rec-list" id="rec-list">
             <div class="rec-empty">Recommendations will appear here once enough data is available.</div>
           </div>
@@ -6778,6 +6955,7 @@ body.cfo-focus-open #qbv-dashboard .cfo-focus-close {
           <li>Add MCP config with command <code>node</code>.</li>
           <li>Set args to absolute path ending in <code>/server/index.js</code>.</li>
           <li>Reload client and confirm tools are discovered.</li>
+          <li>For HTTP workflows, deploy <code>server/agents</code> and call <code>/v1/agent/triage</code>.</li>
         </ul>
       </article>
 
@@ -6787,6 +6965,7 @@ body.cfo-focus-open #qbv-dashboard .cfo-focus-close {
           <li><code>finops.calculate</code> for full scenario outputs.</li>
           <li><code>finops.health</code> for score-only checks in workflows.</li>
           <li><code>finops.recommend</code> for zone/provider action plans.</li>
+          <li><code>POST /v1/agent/triage</code> for summary + top actions from current inputs.</li>
         </ul>
       </article>
 
@@ -6863,6 +7042,20 @@ const SHARE_STATE_VERSION = 1;
 const UI_MODE_OPTIONS = ['quick', 'operator', 'architect'];
 const UI_INTENT_OPTIONS = ['viability', 'operations', 'architecture', 'executive'];
 const UI_INTENT_DEFAULT = 'viability';
+const AGENT_SUPPORTED_PROVIDERS = ['aws', 'azure', 'gcp', 'oci', 'ibm', 'alibaba', 'huawei', 'multi'];
+const AGENT_GOAL_BY_INTENT = {
+  viability: 'improve-margin',
+  operations: 'improve-health-zone',
+  architecture: 'reduce-ccer',
+  executive: 'board-brief'
+};
+const AGENT_AUDIENCE_BY_INTENT = {
+  viability: 'cfo',
+  operations: 'finops',
+  architecture: 'cto',
+  executive: 'cfo'
+};
+const AGENT_HTTP_TIMEOUT_MS = 12000;
 const UI_INTENT_STORAGE_KEY = 'ficecal.ui.intent';
 const RELEASE4_RELIABILITY_SEEN_KEY = 'ficecal.r4.reliability.seen';
 const FEATURE_TOGGLE_ORDER = ['multi-tech-normalization', 'ai-token-economics', 'sla-slo-sli-economics'];
@@ -9383,6 +9576,240 @@ function copyShareStateLink() {
   }
 }
 
+function escapeAgentText(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function resolveAgentApiBaseUrl() {
+  if (typeof window.FICECAL_AGENT_API_BASE === 'string' && window.FICECAL_AGENT_API_BASE.trim()) {
+    return window.FICECAL_AGENT_API_BASE.trim().replace(/\/+$/, '');
+  }
+
+  try {
+    const url = new URL(window.location.href);
+    const fromQuery = String(url.searchParams.get('agentApi') || '').trim();
+    if (fromQuery) return fromQuery.replace(/\/+$/, '');
+  } catch {}
+
+  return '';
+}
+
+function buildAgentTriagePayload() {
+  const inputs = {};
+  SHAREABLE_INPUT_KEYS.forEach((key) => {
+    const value = lastInputs ? lastInputs[key] : null;
+    if (value === null || value === undefined || value === '') return;
+    if (typeof value === 'number' && !Number.isFinite(value)) return;
+    inputs[key] = value;
+  });
+  inputs.techDomains = getSelectedTechDomains();
+
+  const intent = getCurrentUiIntent();
+  const providerScope = getActiveProviderScope().filter((provider) => AGENT_SUPPORTED_PROVIDERS.includes(provider));
+
+  return {
+    requestId: `ui-triage-${Date.now()}`,
+    inputs,
+    providers: providerScope,
+    context: {
+      goal: AGENT_GOAL_BY_INTENT[intent] || 'improve-health-zone',
+      audience: AGENT_AUDIENCE_BY_INTENT[intent] || 'finops',
+      maxActions: 3,
+      timeHorizonDays: 90
+    },
+    options: {
+      includeStateToken: true,
+      includeRaw: true
+    }
+  };
+}
+
+function setAgentTriageButtonLoading(isLoading) {
+  const btn = document.getElementById('calc-agent-triage-btn');
+  if (!btn) return;
+  btn.disabled = Boolean(isLoading);
+  btn.textContent = isLoading ? 'Running Agent Triage...' : 'Run Agent Triage (Beta)';
+}
+
+function setAgentTriageRetryLoading(isLoading) {
+  const btn = document.getElementById('agent-triage-retry-btn');
+  if (!btn) return;
+  btn.disabled = Boolean(isLoading);
+  btn.textContent = isLoading ? 'Checking…' : 'Retry';
+}
+
+function setAgentTriageStatus(message, tone = 'neutral') {
+  const statusEl = document.getElementById('agent-triage-status');
+  if (!statusEl) return;
+  statusEl.classList.remove('is-checking', 'is-ok', 'is-error');
+  if (tone === 'checking') statusEl.classList.add('is-checking');
+  if (tone === 'ok') statusEl.classList.add('is-ok');
+  if (tone === 'error') statusEl.classList.add('is-error');
+  statusEl.textContent = message;
+}
+
+async function fetchWithTimeout(url, options = {}, timeoutMs = AGENT_HTTP_TIMEOUT_MS) {
+  const controller = new AbortController();
+  const timeoutId = window.setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetch(url, { ...options, signal: controller.signal });
+  } finally {
+    window.clearTimeout(timeoutId);
+  }
+}
+
+function retryAgentTriageStatus() {
+  refreshAgentTriageStatus();
+}
+
+async function refreshAgentTriageStatus() {
+  const endpoint = resolveAgentApiBaseUrl();
+  if (!endpoint) {
+    setAgentTriageStatus('Agent endpoint not configured. Add ?agentApi=https://<service>.onrender.com to enable triage.', 'error');
+    return;
+  }
+
+  setAgentTriageRetryLoading(true);
+  setAgentTriageStatus(`Checking Agent Hub at ${endpoint}...`, 'checking');
+  try {
+    const response = await fetchWithTimeout(`${endpoint}/healthz`, {
+      method: 'GET',
+      headers: {
+        'accept': 'application/json'
+      }
+    });
+
+    if (!response.ok) {
+      setAgentTriageStatus(`Agent Hub unavailable (${response.status}) at ${endpoint}.`, 'error');
+      return;
+    }
+
+    setAgentTriageStatus(`Agent Hub connected at ${endpoint}.`, 'ok');
+  } catch (err) {
+    if (err && err.name === 'AbortError') {
+      setAgentTriageStatus(`Agent Hub health check timed out after ${Math.round(AGENT_HTTP_TIMEOUT_MS / 1000)}s at ${endpoint}.`, 'error');
+      return;
+    }
+    setAgentTriageStatus(`Agent Hub unreachable at ${endpoint}.`, 'error');
+  } finally {
+    setAgentTriageRetryLoading(false);
+  }
+}
+
+function renderAgentTriageResult(payload, endpoint) {
+  const panel = document.getElementById('agent-triage-result');
+  if (!panel) return;
+
+  const summary = (payload && payload.summary) || {};
+  const actions = Array.isArray(payload && payload.actionPlan) ? payload.actionPlan : [];
+  const assumptions = Array.isArray(payload && payload.assumptions) ? payload.assumptions : [];
+  const scoreText = (summary.currentScore === null || summary.currentScore === undefined)
+    ? 'score unavailable'
+    : `score ${Math.round(summary.currentScore)}`;
+  const zoneText = summary.currentZoneTitle || summary.currentZoneKey || 'zone unavailable';
+  const actionItems = actions.length
+    ? actions.map((action) => {
+      const title = escapeAgentText(action.title || 'Untitled action');
+      const priority = escapeAgentText(action.priority || 'medium');
+      const category = escapeAgentText(action.category || 'infrastructure');
+      const rationale = escapeAgentText(action.rationale || action.action || 'No rationale provided.');
+      return `<li><strong>${title}</strong> <em>(${priority}/${category})</em><br>${rationale}</li>`;
+    }).join('')
+    : '<li>No prioritized actions were returned for the current input state.</li>';
+
+  const assumptionsBlock = assumptions.length
+    ? `<div class="agent-triage-assumptions"><strong>Assumptions / warnings:</strong><ul>${assumptions.map(item => `<li>${escapeAgentText(item)}</li>`).join('')}</ul></div>`
+    : '';
+
+  panel.classList.remove('is-error');
+  panel.hidden = false;
+  panel.innerHTML = `
+    <div class="agent-triage-head">
+      <div class="agent-triage-title">Agent Triage Result</div>
+      <div class="agent-triage-meta">Endpoint: ${escapeAgentText(endpoint)}</div>
+    </div>
+    <p class="agent-triage-summary"><strong>${escapeAgentText(zoneText)}</strong> (${escapeAgentText(scoreText)}). ${escapeAgentText(summary.headline || 'No headline generated.')}</p>
+    <ol class="agent-triage-actions">${actionItems}</ol>
+    ${assumptionsBlock}
+  `;
+}
+
+function renderAgentTriageError(message) {
+  const panel = document.getElementById('agent-triage-result');
+  if (!panel) return;
+
+  panel.classList.add('is-error');
+  panel.hidden = false;
+  panel.innerHTML = `
+    <div class="agent-triage-head">
+      <div class="agent-triage-title">Agent Triage Error</div>
+    </div>
+    <p class="agent-triage-summary">${escapeAgentText(message)}</p>
+  `;
+}
+
+async function runAgentTriage() {
+  const endpoint = resolveAgentApiBaseUrl();
+  if (!endpoint) {
+    setAgentTriageStatus('Agent endpoint not configured. Add ?agentApi=https://<service>.onrender.com to enable triage.', 'error');
+    renderAgentTriageError('No Agent Hub endpoint configured. Use ?agentApi=https://<service>.onrender.com in the URL or set window.FICECAL_AGENT_API_BASE before running triage.');
+    return;
+  }
+
+  const payload = buildAgentTriagePayload();
+  if (!payload.inputs || Object.keys(payload.inputs).length === 0) {
+    renderAgentTriageError('Add at least one meaningful calculator input before running Agent Triage.');
+    return;
+  }
+
+  setAgentTriageButtonLoading(true);
+  setAgentTriageRetryLoading(true);
+  setAgentTriageStatus(`Submitting triage request to ${endpoint}...`, 'checking');
+  try {
+    const response = await fetchWithTimeout(`${endpoint}/v1/agent/triage`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const raw = await response.text();
+    let parsed = {};
+    try {
+      parsed = raw ? JSON.parse(raw) : {};
+    } catch {
+      parsed = { status: 'error', error: raw || 'Non-JSON response from Agent Hub.' };
+    }
+
+    if (!response.ok || parsed.status === 'error' || parsed.status === 'needs-input') {
+      const fallbackError = `Agent triage call failed (${response.status || 'network'}).`;
+      setAgentTriageStatus(`Agent Hub request failed at ${endpoint}.`, 'error');
+      renderAgentTriageError(parsed.error || fallbackError);
+      return;
+    }
+
+    setAgentTriageStatus(`Agent Hub connected at ${endpoint}.`, 'ok');
+    renderAgentTriageResult(parsed, endpoint);
+  } catch (err) {
+    if (err && err.name === 'AbortError') {
+      setAgentTriageStatus(`Agent Hub triage timed out after ${Math.round(AGENT_HTTP_TIMEOUT_MS / 1000)}s at ${endpoint}.`, 'error');
+      renderAgentTriageError('Agent triage request timed out. Try again or verify endpoint responsiveness.');
+      return;
+    }
+    setAgentTriageStatus(`Agent Hub unreachable at ${endpoint}.`, 'error');
+    renderAgentTriageError(err instanceof Error ? err.message : 'Unable to reach Agent Hub endpoint.');
+  } finally {
+    setAgentTriageButtonLoading(false);
+    setAgentTriageRetryLoading(false);
+  }
+}
+
 function loadDemoScenario(scenarioKey) {
   const preset = DEMO_SCENARIOS[scenarioKey];
   if (!preset) {
@@ -11396,6 +11823,161 @@ function priorityWeight(priority) {
   return 2;
 }
 
+const RECOMMENDATION_SEVERITY_META = Object.freeze({
+  critical: { rank: 0, key: 'critical', label: 'Critical' },
+  high: { rank: 1, key: 'high', label: 'High' },
+  needs: { rank: 2, key: 'needs', label: 'Needs data' },
+  low: { rank: 3, key: 'low', label: 'Low' },
+  info: { rank: 4, key: 'info', label: 'Info' }
+});
+
+function getOutputCardTitleById(cardId = '') {
+  if (!cardId) return '';
+  const fromTooltip = OUTPUT_TOOLTIP_CONTENT[cardId];
+  if (fromTooltip && fromTooltip.title) return fromTooltip.title;
+  const card = document.getElementById(cardId);
+  if (!card) return cardId;
+  const labelText = String((card.querySelector('.calc-out-label') || {}).textContent || '').replace(/\s+/g, ' ').trim();
+  return labelText || cardId;
+}
+
+function getRecommendationSeverityMeta(rec = {}, zoneKey = 'green') {
+  if (rec && typeof rec.severityKey === 'string' && RECOMMENDATION_SEVERITY_META[rec.severityKey]) {
+    return RECOMMENDATION_SEVERITY_META[rec.severityKey];
+  }
+
+  if (rec && rec.cardId) {
+    const card = document.getElementById(rec.cardId);
+    if (card) return getOutputCardSeverityMeta(card);
+  }
+
+  if (rec && rec.priority === 'high') return RECOMMENDATION_SEVERITY_META.high;
+  if (rec && rec.priority === 'medium') return RECOMMENDATION_SEVERITY_META.needs;
+  if (rec && rec.priority === 'low') return RECOMMENDATION_SEVERITY_META.low;
+  return RECOMMENDATION_SEVERITY_META.info;
+}
+
+function decorateRecommendationForRender(rec = {}, zoneKey = 'green') {
+  const severity = getRecommendationSeverityMeta(rec, zoneKey);
+  const sourceCardId = rec.sourceCardId || rec.cardId || '';
+  const sourceCardLabel = rec.sourceCardLabel || getOutputCardTitleById(sourceCardId);
+  const mappingType = rec.mappingType || (sourceCardId ? 'output-card' : 'general');
+  return {
+    ...rec,
+    severityKey: severity.key,
+    severityRank: severity.rank,
+    severityLabel: severity.label,
+    sourceCardId,
+    sourceCardLabel,
+    mappingType
+  };
+}
+
+function buildRecommendationSeverityDividerHtml(severityKey, count) {
+  const label = getSeverityDividerLabel(severityKey, count);
+  return `
+    <div class="calc-severity-divider severity-${severityKey} rec-severity-divider" aria-label="${label}">
+      <span class="calc-severity-divider-line"></span>
+      <span class="calc-severity-divider-label">${label}</span>
+      <span class="calc-severity-divider-line"></span>
+    </div>
+  `;
+}
+
+function buildRecommendationCardHtml(rec) {
+  const providerTag = rec.providers.length ? rec.providers.join('/').toUpperCase() : 'UNIVERSAL';
+  const priorityTag = rec.priority.toUpperCase();
+  const categoryLabel = recommendationCategoryLabel(rec.categoryKey);
+  const linksHtml = buildRecommendationReferenceLinks(rec.refs || []);
+  const sourceHtml = rec.sourceCardId
+    ? `<button type="button" class="rec-source-link" data-source-card-id="${rec.sourceCardId}" aria-label="Mapped from ${rec.sourceCardLabel || rec.sourceCardId}">Mapped from: ${rec.sourceCardLabel || rec.sourceCardId}</button>`
+    : '';
+
+  return `
+    <article class="rec-card ${rec.priority}${rec.sourceCardId ? ' is-source-linked' : ''}" data-severity-key="${rec.severityKey}">
+      <div class="rec-head">
+        <span class="rec-icon">${rec.icon}</span>
+        <span class="rec-title">${rec.title}</span>
+        <span class="rec-tag severity-${rec.severityKey}">${rec.severityLabel}</span>
+        <span class="rec-tag category-${rec.categoryKey}">${categoryLabel}</span>
+        <span class="rec-tag">${providerTag}</span>
+        <span class="rec-tag priority-${rec.priority}">${priorityTag}</span>
+      </div>
+      <p class="rec-desc">${rec.desc}</p>
+      <p class="rec-action">→ ${rec.action}</p>
+      ${sourceHtml}
+      ${linksHtml}
+    </article>
+  `;
+}
+
+function renderRecommendationsBySeverity(recommendations = []) {
+  if (!recommendations.length) return '';
+
+  const counts = recommendations.reduce((acc, rec) => {
+    const key = rec.severityKey || 'info';
+    acc[key] = (acc[key] || 0) + 1;
+    return acc;
+  }, {});
+
+  const rendered = [];
+  let activeSeverity = null;
+  recommendations.forEach((rec) => {
+    if (rec.severityKey !== activeSeverity) {
+      activeSeverity = rec.severityKey;
+      rendered.push(buildRecommendationSeverityDividerHtml(activeSeverity, counts[activeSeverity] || 0));
+    }
+    rendered.push(buildRecommendationCardHtml(rec));
+  });
+  return rendered.join('');
+}
+
+function updateRecommendationSeverityHelper(recommendations = []) {
+  const helperEl = document.getElementById('rec-severity-helper');
+  if (!helperEl) return;
+
+  if (!recommendations.length) {
+    helperEl.innerHTML = '<strong>Severity order:</strong> Critical → High → Needs data → Low. Recommendation cards mapped from Group C outputs show their source metric.';
+    return;
+  }
+
+  const counters = { critical: 0, high: 0, needs: 0, low: 0 };
+  let mappedCount = 0;
+  recommendations.forEach((rec) => {
+    if (Object.prototype.hasOwnProperty.call(counters, rec.severityKey)) counters[rec.severityKey] += 1;
+    if (rec.sourceCardId) mappedCount += 1;
+  });
+
+  helperEl.innerHTML = `<strong>Severity order:</strong> Critical → High → Needs data → Low. Visible now: ${counters.critical} critical, ${counters.high} high, ${counters.needs} needs data, ${counters.low} low. Mapped recommendation cards: ${mappedCount}.`;
+}
+
+let recommendationSourceCardHandlerBound = false;
+
+function focusRecommendationSourceCard(cardId) {
+  if (!cardId) return;
+  const card = document.getElementById(cardId);
+  if (!card) return;
+
+  card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  card.classList.add('rec-source-target');
+  window.setTimeout(() => {
+    card.classList.remove('rec-source-target');
+  }, 1400);
+}
+
+function bindRecommendationSourceCardHandler() {
+  if (recommendationSourceCardHandlerBound) return;
+  recommendationSourceCardHandlerBound = true;
+
+  document.addEventListener('click', (event) => {
+    const sourceBtn = event.target.closest && event.target.closest('.rec-source-link');
+    if (!sourceBtn) return;
+    event.preventDefault();
+    event.stopPropagation();
+    focusRecommendationSourceCard(sourceBtn.dataset.sourceCardId || '');
+  }, true);
+}
+
 function normalizeRecommendationCategory(category) {
   return Object.prototype.hasOwnProperty.call(RECOMMENDATION_CATEGORY_LABELS, category)
     ? category
@@ -11583,11 +12165,12 @@ function buildOutputCardRecommendations({ zoneKey }) {
       inputs: ['Relevant calculator inputs for this indicator']
     };
     const signal = getOutputCardSignal(card);
+    const severity = getOutputCardSeverityMeta(card);
     const valueText = ((card.querySelector('.calc-out-val') || {}).textContent || '—').trim();
 
     let priority = 'low';
-    if (signal.key === 'bad') priority = 'high';
-    else if (signal.key === 'warn' || signal.key === 'needs') priority = 'medium';
+    if (severity.key === 'critical') priority = 'high';
+    else if (severity.key === 'high' || severity.key === 'needs') priority = 'medium';
 
     let actionText = guide.recommended && guide.recommended.length ? guide.recommended[0] : 'Review this indicator with current assumptions.';
     if (signal.key === 'needs' && guide.inputs && guide.inputs.length) {
@@ -11616,7 +12199,13 @@ function buildOutputCardRecommendations({ zoneKey }) {
       providers: [],
       zones: [zoneKey],
       priority,
+      severityKey: severity.key,
+      severityRank: severity.rank,
+      severityLabel: severity.label,
       cardId,
+      sourceCardId: cardId,
+      sourceCardLabel: displayTitle,
+      mappingType: 'output-card',
       refs
     };
   });
@@ -11678,6 +12267,7 @@ function updateHealthAndRecommendations(inputs) {
     scoreEl.textContent = '—';
     scoreEl.style.color = '#7a7a8c';
     listEl.innerHTML = '<div class="rec-empty">Recommendations will appear after health scoring data is available.</div>';
+    updateRecommendationSeverityHelper([]);
     renderIntentGuidedPath(inputs || {});
     return;
   }
@@ -11944,12 +12534,15 @@ function updateHealthAndRecommendations(inputs) {
   const scoped = [...outputCardRecommendations, ...strategicRecommendations, ...aiRecommendations, ...RECOMMENDATIONS]
     .map(rec => {
       const categoryKey = normalizeRecommendationCategory(rec.categoryKey || rec.category || inferRecommendationCategory(rec));
-      const refs = resolveRecommendationOfficialReferences({ ...rec, categoryKey });
-      return { ...rec, categoryKey, refs };
+      const decorated = decorateRecommendationForRender({ ...rec, categoryKey }, zoneKey);
+      const refs = resolveRecommendationOfficialReferences({ ...decorated, categoryKey });
+      return { ...decorated, categoryKey, refs };
     })
     .filter(rec => rec.zones.includes(zoneKey))
     .filter(rec => rec.providers.length === 0 || providers.some(p => rec.providers.includes(p)))
     .sort((a, b) => {
+      const severityDelta = (a.severityRank ?? Number.MAX_SAFE_INTEGER) - (b.severityRank ?? Number.MAX_SAFE_INTEGER);
+      if (severityDelta !== 0) return severityDelta;
       const priorityDelta = priorityWeight(a.priority) - priorityWeight(b.priority);
       if (priorityDelta !== 0) return priorityDelta;
       const intentDelta = recommendationIntentWeight(a.categoryKey, activeIntent) - recommendationIntentWeight(b.categoryKey, activeIntent);
@@ -11969,31 +12562,14 @@ function updateHealthAndRecommendations(inputs) {
     } else {
       listEl.innerHTML = `<div class="rec-empty">No ${selectedLabel} recommendations match your current zone/provider context. Try another category or switch back to All.</div>`;
     }
+    updateRecommendationSeverityHelper([]);
     applyGlossaryAutoLinks(document.getElementById('group-health'));
     renderIntentGuidedPath(inputs || {});
     return;
   }
 
-  listEl.innerHTML = filtered.map(rec => {
-    const providerTag = rec.providers.length ? rec.providers.join('/').toUpperCase() : 'UNIVERSAL';
-    const priorityTag = rec.priority.toUpperCase();
-    const categoryLabel = recommendationCategoryLabel(rec.categoryKey);
-    const linksHtml = buildRecommendationReferenceLinks(rec.refs || []);
-    return `
-      <article class="rec-card ${rec.priority}">
-        <div class="rec-head">
-          <span class="rec-icon">${rec.icon}</span>
-          <span class="rec-title">${rec.title}</span>
-          <span class="rec-tag category-${rec.categoryKey}">${categoryLabel}</span>
-          <span class="rec-tag">${providerTag}</span>
-          <span class="rec-tag priority-${rec.priority}">${priorityTag}</span>
-        </div>
-        <p class="rec-desc">${rec.desc}</p>
-        <p class="rec-action">→ ${rec.action}</p>
-        ${linksHtml}
-      </article>
-    `;
-  }).join('');
+  listEl.innerHTML = renderRecommendationsBySeverity(filtered);
+  updateRecommendationSeverityHelper(filtered);
   applyGlossaryAutoLinks(document.getElementById('group-health'));
   renderIntentGuidedPath(inputs || {});
 }
@@ -14695,6 +15271,7 @@ async function updatePageMetadataFromGitHub() {
 initOutputCardTooltips();
 initFormulaCardTooltips();
 bindMissingDataCtaHandler();
+bindRecommendationSourceCardHandler();
 cacheSubTexts();
 refreshCurrencyUnits();
 applyInformationIcons();
@@ -14716,6 +15293,7 @@ renderCfoForecastDashboard(null);
 if (!loadSharedStateFromUrl()) {
   updateHealthAndRecommendations(lastInputs);
 }
+refreshAgentTriageStatus();
 initFeatureRuntime();
 </script>
 </body>
