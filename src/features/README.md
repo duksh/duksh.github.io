@@ -14,7 +14,6 @@ This folder is the modular contract layer for FiceCal features.
 - `multi-tech-normalization` (optional, active)
 - `ai-token-economics` (optional, experimental, Wave 3)
 - `sla-slo-sli-economics` (optional, experimental, Release 4 scaffold)
-- `agent-orchestration` (optional, experimental, ADK/A2A agent triage + orchestration)
 
 ## Rules
 
